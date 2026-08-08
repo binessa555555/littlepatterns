@@ -1,7 +1,39 @@
+"use client";
 import Image from "next/image";
 import { products } from "@/data/products";
 
 export default function Home() {
+    async function buyNow(productName: string, price: number) {
+    try {
+      const response = await fetch("/api/checkout", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: productName,
+          price: price,
+          quantity: 1,
+        }),
+      });
+
+      const data = await response.json();
+
+if (!response.ok) {
+  alert(data.error || "Checkout failed");
+  return;
+}
+
+      if (data.url) {
+        window.location.href = data.url;
+      } else {
+        alert("Unable to start checkout.");
+      }
+    } catch (error) {
+      console.error(error);
+      alert("Something went wrong.");
+    }
+  }
   return (
     <main className="min-h-screen bg-[#f7fbf8] text-[#0b3f7c]">
       <header className="sticky top-0 z-50 border-b border-[#0b3f7c]/10 bg-[#f7fbf8]/95 backdrop-blur">
@@ -123,7 +155,12 @@ export default function Home() {
                     AED {product.originalPrice.toFixed(2)}
                   </span>
                 </div>
-                <a
+                <button
+  onClick={() => buyNow(product.name, product.salePrice)}
+  className="mt-4 mr-3 inline-flex rounded-full bg-[#0b3f7c] px-5 py-2.5 text-sm text-white transition hover:opacity-80"
+>
+  Buy Now
+</button><a
                   href={`https://wa.me/?text=${encodeURIComponent(
                     `Hello, I am interested in ${product.name} from Little Patterns.`
                   )}`}
