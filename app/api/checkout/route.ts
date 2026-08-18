@@ -1,51 +1,63 @@
-import Stripe from "stripe";
 import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {
   try {
-    const secretKey = process.env.STRIPE_SECRET_KEY;
+    const apiKey = process.env.ZIINA_API_KEY;
 
-    if (!secretKey) {
+    if (!apiKey) {
       return NextResponse.json(
-        { error: "STRIPE_SECRET_KEY is missing" },
+        { error: "Ziina API key is missing" },
         { status: 500 }
       );
     }
 
-    const stripe = new Stripe(secretKey);
-
     const body = await request.json();
 
-    const session = await stripe.checkout.sessions.create({
-      mode: "payment",
+    const productName = body.name || "Little Patterns Fabric";
+    const quantity = Math.max(1, Number(body.quantity) || 1);
 
-      line_items: [
-        {
-          price_data: {
-            currency: "aed",
-            product_data: {
-              name: body.name || "Little Patterns Fabric",
-            },
-            unit_amount: 19700,
-          },
-          quantity: body.quantity || 1,
+    // AED 197.50 per fabric
+    const amount = 19750 * quantity;
+
+    const ziinaResponse = await fetch(
+      "https://api-v2.ziina.com/api/payment_intent",
+      {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${apiKey}`,
+          "Content-Type": "application/json",
         },
-      ],
+        body: JSON.stringify({
+          amount: amount,
+          currency_code: "AED",
+          message: `${productName} x ${quantity}`,
+          success_url: "https://www.littlepatterns.ae/?payment=success",
+          cancel_url: "https://www.littlepatterns.ae/?payment=cancelled",
+          failure_url: "https://www.littlepatterns.ae/?payment=failed",
+          test: false,
+        }),
+      }
+    );
 
-      success_url: `${request.headers.get("origin")}/?payment=success`,
-      cancel_url: `${request.headers.get("origin")}/?payment=cancelled`,
-    });
+    const data = await ziinaResponse.json();
+
+    if (!ziinaResponse.ok || !data.redirect_url) {
+      console.error("Ziina error:", data);
+
+      return NextResponse.json(
+        { error: data?.message || "Ziina payment could not be created" },
+        { status: 500 }
+      );
+    }
 
     return NextResponse.json({
-      url: session.url,
+      url: data.redirect_url,
     });
-  } catch (error: any) {
-    console.error("STRIPE CHECKOUT ERROR:", error);
+  } catch (error) {
+    console.error("Ziina checkout error:", error);
 
     return NextResponse.json(
-      {
-        error: error?.message || "Stripe checkout failed",
-      },
+      { error: "Unable to start payment" },
       { status: 500 }
     );
   }
