@@ -80,7 +80,7 @@ if (!response.ok) {
               Beautiful patterns for exceptional pieces.
             </h1>
             <p className="mt-6 max-w-xl text-lg leading-8 text-[#0b3f7c]/75">
-              Discover 21 distinctive fabric designs, carefully selected for
+              Discover 30 distinctive fabric designs, carefully selected for
               colour, detail and timeless style.
             </p>
 
@@ -92,7 +92,7 @@ if (!response.ok) {
                 Explore Collection
               </a>
               <span className="rounded-full border border-[#0b3f7c]/20 px-5 py-3 text-sm">
-                21% off all fabrics
+                
               </span>
             </div>
           </div>
@@ -151,9 +151,7 @@ if (!response.ok) {
                   <span className="text-lg font-semibold">
                     AED {product.price.toFixed(2)}
                   </span>
-                  <span className="text-sm text-[#0b3f7c]/45 line-through">
-                    AED {product.price.toFixed(2)}
-                  </span>
+                  
                 </div>
                 <button
   onClick={() => buyNow(product.name, product.price)}
