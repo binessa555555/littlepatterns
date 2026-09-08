@@ -10,6 +10,7 @@ export default function Home() {
   }>(null);
   const [rotation, setRotation] = useState(0);
   const [tilt, setTilt] = useState(0);
+  const [zoom, setZoom] = useState(1);
 
     async function buyNow(productName: string, price: number) {
     try {
@@ -146,6 +147,7 @@ if (!response.ok) {
                 onClick={() => {
                   setRotation(0);
                   setTilt(0);
+                  setZoom(1);
                   setSelectedFabric({
                     name: product.name,
                     image: product.image,
@@ -241,6 +243,12 @@ if (!response.ok) {
                 perspective: "1400px",
                 touchAction: "none",
               }}
+              onWheel={(e) => {
+                e.preventDefault();
+                setZoom((z) =>
+                  Math.max(1, Math.min(4, z + (e.deltaY < 0 ? 0.2 : -0.2)))
+                );
+              }}
               onPointerDown={(e) => {
                 e.currentTarget.setPointerCapture(e.pointerId);
                 e.currentTarget.dataset.startX = String(e.clientX);
@@ -278,7 +286,7 @@ if (!response.ok) {
               <div
                 style={{
                   transform:
-                    `rotateX(${tilt}deg) rotateY(${rotation}deg)`,
+                    `scale(${zoom}) rotateX(${tilt}deg) rotateY(${rotation}deg)`,
                   transformStyle: "preserve-3d",
                   transition: "transform 60ms linear",
                 }}
@@ -297,6 +305,36 @@ if (!response.ok) {
             <p className="mt-3 text-center text-sm text-white/70">
               Drag left or right to rotate • Drag up or down to tilt
             </p>
+
+            <div className="mt-5 flex flex-wrap justify-center gap-3">
+              <button
+                type="button"
+                onClick={() => setZoom((z) => Math.max(1, z - 0.5))}
+                className="flex h-11 w-11 items-center justify-center rounded-full bg-white text-xl font-bold text-[#0b3f7c]"
+              >
+                −
+              </button>
+
+              <button
+                type="button"
+                onClick={() => setZoom((z) => Math.min(4, z + 0.5))}
+                className="flex h-11 w-11 items-center justify-center rounded-full bg-white text-xl font-bold text-[#0b3f7c]"
+              >
+                +
+              </button>
+
+              <button
+                type="button"
+                onClick={() => {
+                  setZoom(1);
+                  setRotation(0);
+                  setTilt(0);
+                }}
+                className="rounded-full bg-white px-5 py-2 text-sm font-semibold text-[#0b3f7c]"
+              >
+                Reset
+              </button>
+            </div>
 
             <p className="mt-4 text-center text-xl font-semibold text-white">
               {selectedFabric.name}
