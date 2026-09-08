@@ -1,16 +1,8 @@
 "use client";
 import Image from "next/image";
-import { useState } from "react";
 import { products } from "@/data/products";
 
 export default function Home() {
-  const [selectedFabric, setSelectedFabric] = useState<null | {
-    name: string;
-    image: string;
-  }>(null);
-  const [rotation, setRotation] = useState(0);
-  const [tilt, setTilt] = useState(0);
-
     async function buyNow(productName: string, price: number) {
     try {
       const response = await fetch("/api/checkout", {
@@ -141,18 +133,7 @@ if (!response.ok) {
         <div className="grid gap-x-6 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
           {products.map((product) => (
             <article key={product.name} className="group">
-              <button
-                type="button"
-                onClick={() => {
-                  setRotation(0);
-                  setTilt(0);
-                  setSelectedFabric({
-                    name: product.name,
-                    image: product.image,
-                  });
-                }}
-                className="relative block w-full overflow-hidden rounded-[2rem] bg-white"
-              >
+              <div className="relative overflow-hidden rounded-[2rem] bg-white">
                 <Image
                   src={product.image}
                   alt={product.name}
@@ -160,7 +141,8 @@ if (!response.ok) {
                   height={900}
                   className="aspect-square w-full object-cover transition duration-500 group-hover:scale-[1.03]"
                 />
-              </button>
+                
+              </div>
 
               <div className="mt-5">
                 <h3 className="text-xl font-semibold">{product.name}</h3>
@@ -217,94 +199,6 @@ if (!response.ok) {
           </p>
         </div>
       </footer>
-    
-      {selectedFabric && (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-5"
-          onClick={() => setSelectedFabric(null)}
-        >
-          <div
-            className="relative max-w-4xl"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <button
-              type="button"
-              onClick={() => setSelectedFabric(null)}
-              className="absolute -right-3 -top-3 z-10 flex h-12 w-12 items-center justify-center rounded-full bg-white text-3xl shadow-xl"
-            >
-              ×
-            </button>
-
-            <div
-              className="cursor-grab select-none active:cursor-grabbing"
-              style={{
-                perspective: "1400px",
-                touchAction: "none",
-              }}
-              onPointerDown={(e) => {
-                e.currentTarget.setPointerCapture(e.pointerId);
-                e.currentTarget.dataset.startX = String(e.clientX);
-                e.currentTarget.dataset.startY = String(e.clientY);
-                e.currentTarget.dataset.startRotation = String(rotation);
-                e.currentTarget.dataset.startTilt = String(tilt);
-              }}
-              onPointerMove={(e) => {
-                if (!e.currentTarget.hasPointerCapture(e.pointerId)) return;
-
-                const startX = Number(e.currentTarget.dataset.startX);
-                const startY = Number(e.currentTarget.dataset.startY);
-                const startRotation = Number(
-                  e.currentTarget.dataset.startRotation
-                );
-                const startTilt = Number(
-                  e.currentTarget.dataset.startTilt
-                );
-
-                setRotation(
-                  startRotation + (e.clientX - startX) * 0.65
-                );
-
-                setTilt(
-                  Math.max(
-                    -25,
-                    Math.min(
-                      25,
-                      startTilt - (e.clientY - startY) * 0.15
-                    )
-                  )
-                );
-              }}
-            >
-              <div
-                style={{
-                  transform:
-                    `rotateX(${tilt}deg) rotateY(${rotation}deg)`,
-                  transformStyle: "preserve-3d",
-                  transition: "transform 60ms linear",
-                }}
-              >
-                <Image
-                  src={selectedFabric.image}
-                  alt={selectedFabric.name}
-                  width={1200}
-                  height={1200}
-                  draggable={false}
-                  className="max-h-[75vh] w-auto rounded-[2rem] object-contain shadow-2xl"
-                />
-              </div>
-            </div>
-
-            <p className="mt-3 text-center text-sm text-white/70">
-              Drag left or right to rotate • Drag up or down to tilt
-            </p>
-
-            <p className="mt-4 text-center text-xl font-semibold text-white">
-              {selectedFabric.name}
-            </p>
-          </div>
-        </div>
-      )}
-
-</main>
+    </main>
   );
 }
