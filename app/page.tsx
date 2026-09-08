@@ -81,6 +81,10 @@ if (!response.ok) {
             </h1>
             
 
+            <p className="mt-6 text-lg md:text-xl leading-relaxed text-slate-600">
+              Where every beautiful thing begins, and elegance is in every thread.
+            </p>
+
             <div className="mt-8 flex flex-wrap items-center gap-4">
               <a
                 href="#fabrics"
