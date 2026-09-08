@@ -79,10 +79,7 @@ if (!response.ok) {
             <h1 className="max-w-2xl text-5xl font-semibold leading-tight md:text-7xl">
               Beautiful patterns for exceptional pieces.
             </h1>
-            <p className="mt-6 max-w-xl text-lg leading-8 text-[#0b3f7c]/75">
-              Discover 30 distinctive fabric designs, carefully selected for
-              colour, detail and timeless style.
-            </p>
+            
 
             <div className="mt-8 flex flex-wrap items-center gap-4">
               <a
@@ -119,7 +116,7 @@ if (!response.ok) {
       <section id="fabrics" className="mx-auto max-w-7xl px-5 py-20 md:px-8">
         <div className="mb-12 flex flex-col justify-between gap-4 md:flex-row md:items-end">
           <div>
-            <p className="text-xs uppercase tracking-[0.3em]">The Collection</p>
+            <p className="text-xs uppercase tracking-[0.3em]">Made to Be Noticed</p>
             <h2 className="mt-3 text-4xl font-semibold md:text-5xl">
               All Fabrics
             </h2>
