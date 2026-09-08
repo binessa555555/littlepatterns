@@ -1,8 +1,16 @@
 "use client";
 import Image from "next/image";
+import { useState } from "react";
 import { products } from "@/data/products";
 
 export default function Home() {
+  const [selectedFabric, setSelectedFabric] = useState<null | {
+    name: string;
+    image: string;
+  }>(null);
+  const [viewerPage, setViewerPage] = useState(1);
+  const [zoom, setZoom] = useState(1);
+
     async function buyNow(productName: string, price: number) {
     try {
       const response = await fetch("/api/checkout", {
@@ -133,7 +141,18 @@ if (!response.ok) {
         <div className="grid gap-x-6 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
           {products.map((product) => (
             <article key={product.name} className="group">
-              <div className="relative overflow-hidden rounded-[2rem] bg-white">
+              <button
+                type="button"
+                onClick={() => {
+                  setSelectedFabric({
+                    name: product.name,
+                    image: product.image,
+                  });
+                  setViewerPage(1);
+                  setZoom(1);
+                }}
+                className="relative block w-full overflow-hidden rounded-[2rem] bg-white"
+              >
                 <Image
                   src={product.image}
                   alt={product.name}
@@ -141,8 +160,7 @@ if (!response.ok) {
                   height={900}
                   className="aspect-square w-full object-cover transition duration-500 group-hover:scale-[1.03]"
                 />
-                
-              </div>
+              </button>
 
               <div className="mt-5">
                 <h3 className="text-xl font-semibold">{product.name}</h3>
@@ -199,6 +217,136 @@ if (!response.ok) {
           </p>
         </div>
       </footer>
-    </main>
+    
+      {selectedFabric && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/75 p-4 backdrop-blur-sm"
+          onClick={() => setSelectedFabric(null)}
+        >
+          <div
+            className="relative w-full max-w-5xl overflow-hidden rounded-[2rem] bg-white p-4 md:p-6"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              type="button"
+              onClick={() => setSelectedFabric(null)}
+              className="absolute right-5 top-5 z-30 flex h-11 w-11 items-center justify-center rounded-full bg-white text-2xl shadow-lg"
+            >
+              ×
+            </button>
+
+            <div className="relative overflow-hidden rounded-[1.5rem] bg-[#f5f3ef]">
+              <div className="absolute left-4 top-4 z-20 rounded-2xl bg-white/90 px-4 py-2 text-sm shadow-sm">
+                {viewerPage} / 2
+                <div className="text-xs text-slate-500">
+                  {viewerPage === 1
+                    ? "Fabric Detail"
+                    : "Worn in Emirati Style"}
+                </div>
+              </div>
+
+              {viewerPage === 1 ? (
+                <div className="flex min-h-[500px] items-center justify-center overflow-hidden p-4 md:min-h-[650px]">
+                  <Image
+                    src={selectedFabric.image}
+                    alt={selectedFabric.name}
+                    width={1200}
+                    height={1200}
+                    draggable={false}
+                    className="max-h-[70vh] w-auto object-contain transition-transform duration-200"
+                    style={{
+                      transform: `scale(${zoom})`,
+                    }}
+                  />
+                </div>
+              ) : (
+                <div className="flex min-h-[500px] items-center justify-center md:min-h-[650px]">
+                  <Image
+                    src={`/models/${selectedFabric.image
+                      .split("/")
+                      .pop()
+                      ?.replace(".webp", "-model.webp")}`}
+                    alt={`${selectedFabric.name} worn in Emirati style`}
+                    width={1000}
+                    height={1200}
+                    className="max-h-[70vh] w-auto object-contain"
+                  />
+                </div>
+              )}
+
+              <button
+                type="button"
+                onClick={() => {
+                  setViewerPage(viewerPage === 1 ? 2 : 1);
+                  setZoom(1);
+                }}
+                className="absolute left-4 top-1/2 z-20 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full bg-white text-2xl shadow-lg"
+              >
+                ‹
+              </button>
+
+              <button
+                type="button"
+                onClick={() => {
+                  setViewerPage(viewerPage === 1 ? 2 : 1);
+                  setZoom(1);
+                }}
+                className="absolute right-4 top-1/2 z-20 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full bg-white text-2xl shadow-lg"
+              >
+                ›
+              </button>
+
+              {viewerPage === 1 && (
+                <div className="absolute bottom-5 left-1/2 z-20 flex -translate-x-1/2 items-center gap-3 rounded-full bg-white/95 p-2 shadow-lg">
+                  <button
+                    type="button"
+                    onClick={() =>
+                      setZoom((z) => Math.max(1, z - 0.5))
+                    }
+                    className="flex h-11 w-11 items-center justify-center rounded-full text-2xl"
+                  >
+                    −
+                  </button>
+
+                  <span className="min-w-[60px] text-center text-sm">
+                    {Math.round(zoom * 100)}%
+                  </span>
+
+                  <button
+                    type="button"
+                    onClick={() =>
+                      setZoom((z) => Math.min(4, z + 0.5))
+                    }
+                    className="flex h-11 w-11 items-center justify-center rounded-full text-2xl"
+                  >
+                    +
+                  </button>
+                </div>
+              )}
+            </div>
+
+            <div className="flex flex-col justify-between gap-4 px-2 pb-1 pt-5 md:flex-row md:items-center">
+              <div>
+                <h2 className="text-2xl font-semibold text-[#0b3f7c]">
+                  {selectedFabric.name}
+                </h2>
+                <p className="mt-1 text-lg text-[#0b3f7c]">
+                  AED 250
+                </p>
+              </div>
+
+              <button
+                type="button"
+                onClick={() => buyNow(selectedFabric.name, 250)}
+                className="rounded-full bg-[#0b3f7c] px-8 py-3 text-white"
+              >
+                Buy Now
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+</main>
   );
 }
