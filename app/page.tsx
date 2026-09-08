@@ -140,9 +140,7 @@ if (!response.ok) {
                   height={900}
                   className="aspect-square w-full object-cover transition duration-500 group-hover:scale-[1.03]"
                 />
-                <span className="absolute left-4 top-4 rounded-full bg-[#0b3f7c] px-3 py-1.5 text-xs font-medium text-white">
-                  21% OFF
-                </span>
+                
               </div>
 
               <div className="mt-5">
