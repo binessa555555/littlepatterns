@@ -100,7 +100,7 @@ if (!response.ok) {
           <div className="grid grid-cols-2 gap-4">
             {products.slice(0, 4).map((product, index) => (
               <div
-                key={product.id}
+                key={product.name}
                 className={index % 2 === 1 ? "translate-y-8" : ""}
               >
                 <Image
@@ -131,7 +131,7 @@ if (!response.ok) {
 
         <div className="grid gap-x-6 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
           {products.map((product) => (
-            <article key={product.id} className="group">
+            <article key={product.name} className="group">
               <div className="relative overflow-hidden rounded-[2rem] bg-white">
                 <Image
                   src={product.image}
@@ -149,14 +149,14 @@ if (!response.ok) {
                 <h3 className="text-xl font-semibold">{product.name}</h3>
                 <div className="mt-2 flex items-center gap-3">
                   <span className="text-lg font-semibold">
-                    AED {product.salePrice.toFixed(2)}
+                    AED {product.price.toFixed(2)}
                   </span>
                   <span className="text-sm text-[#0b3f7c]/45 line-through">
-                    AED {product.originalPrice.toFixed(2)}
+                    AED {product.price.toFixed(2)}
                   </span>
                 </div>
                 <button
-  onClick={() => buyNow(product.name, product.salePrice)}
+  onClick={() => buyNow(product.name, product.price)}
   className="mt-4 mr-3 inline-flex rounded-full bg-[#0b3f7c] px-5 py-2.5 text-sm text-white transition hover:opacity-80"
 >
   Buy Now
