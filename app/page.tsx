@@ -269,7 +269,7 @@ if (!response.ok) {
                     alt={`${selectedFabric.name} worn in Emirati style`}
                     width={1000}
                     height={1200}
-                    className="max-h-[70vh] w-auto object-contain"
+                    className="h-[70vh] w-auto max-w-full object-contain scale-[1.85]"
                   />
                 </div>
               )}
