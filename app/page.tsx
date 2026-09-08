@@ -178,10 +178,7 @@ if (!response.ok) {
             </h2>
           </div>
           <p className="text-lg leading-8 text-white/75">
-            Our collection brings together floral, paisley, damask and
-            ornamental patterns in a wide range of colours, from midnight tones
-            to coral, blush, teal and gold.
-          </p>
+            Thirty prints. Endless possibilities. Find the pattern that turns your next piece into something unforgettable.</p>
         </div>
       </section>
 
