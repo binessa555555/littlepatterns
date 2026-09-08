@@ -1,223 +1,32 @@
-export type Product = {
-  id: number;
-  name: string;
-  slug: string;
-  image: string;
-  originalPrice: number;
-  salePrice: number;
-  discountPercent: number;
-  currency: "AED";
-};
-
-export const products: Product[] = [
-  {
-    "id": 1,
-    "name": "Midnight Bloom",
-    "slug": "midnight-bloom",
-    "image": "/fabrics/01-midnight-bloom.webp",
-    "originalPrice": 250,
-    "salePrice": 197.5,
-    "discountPercent": 21,
-    "currency": "AED"
-  },
-  {
-    "id": 2,
-    "name": "Sapphire Blossom",
-    "slug": "sapphire-blossom",
-    "image": "/fabrics/02-sapphire-blossom.webp",
-    "originalPrice": 250,
-    "salePrice": 197.5,
-    "discountPercent": 21,
-    "currency": "AED"
-  },
-  {
-    "id": 3,
-    "name": "Royal Iris",
-    "slug": "royal-iris",
-    "image": "/fabrics/03-royal-iris.webp",
-    "originalPrice": 250,
-    "salePrice": 197.5,
-    "discountPercent": 21,
-    "currency": "AED"
-  },
-  {
-    "id": 4,
-    "name": "Coral Reef",
-    "slug": "coral-reef",
-    "image": "/fabrics/04-coral-reef.webp",
-    "originalPrice": 250,
-    "salePrice": 197.5,
-    "discountPercent": 21,
-    "currency": "AED"
-  },
-  {
-    "id": 5,
-    "name": "Mauve Magnolia",
-    "slug": "mauve-magnolia",
-    "image": "/fabrics/05-mauve-magnolia.webp",
-    "originalPrice": 250,
-    "salePrice": 197.5,
-    "discountPercent": 21,
-    "currency": "AED"
-  },
-  {
-    "id": 6,
-    "name": "Pink Hibiscus",
-    "slug": "pink-hibiscus",
-    "image": "/fabrics/06-pink-hibiscus.webp",
-    "originalPrice": 250,
-    "salePrice": 197.5,
-    "discountPercent": 21,
-    "currency": "AED"
-  },
-  {
-    "id": 7,
-    "name": "Candy Blossom",
-    "slug": "candy-blossom",
-    "image": "/fabrics/07-candy-blossom.webp",
-    "originalPrice": 250,
-    "salePrice": 197.5,
-    "discountPercent": 21,
-    "currency": "AED"
-  },
-  {
-    "id": 8,
-    "name": "Carol Toile",
-    "slug": "carol-toile",
-    "image": "/fabrics/08-carol-toile.webp",
-    "originalPrice": 250,
-    "salePrice": 197.5,
-    "discountPercent": 21,
-    "currency": "AED"
-  },
-  {
-    "id": 9,
-    "name": "Berry Medallion",
-    "slug": "berry-medallion",
-    "image": "/fabrics/09-berry-medallion.webp",
-    "originalPrice": 250,
-    "salePrice": 197.5,
-    "discountPercent": 21,
-    "currency": "AED"
-  },
-  {
-    "id": 10,
-    "name": "Mint Orchid",
-    "slug": "mint-orchid",
-    "image": "/fabrics/10-mint-orchid.webp",
-    "originalPrice": 250,
-    "salePrice": 197.5,
-    "discountPercent": 21,
-    "currency": "AED"
-  },
-  {
-    "id": 11,
-    "name": "blue Paisley",
-    "slug": "blue-paisley",
-    "image": "/fabrics/11-blue-paisley.webp",
-    "originalPrice": 250,
-    "salePrice": 197.5,
-    "discountPercent": 21,
-    "currency": "AED"
-  },
-  {
-    "id": 12,
-    "name": "Sunset Bloom",
-    "slug": "sunset-bloom",
-    "image": "/fabrics/12-sunset-bloom.webp",
-    "originalPrice": 250,
-    "salePrice": 197.5,
-    "discountPercent": 21,
-    "currency": "AED"
-  },
-  {
-    "id": 13,
-    "name": "Rose Sketch",
-    "slug": "rose-sketch",
-    "image": "/fabrics/13-rose-sketch.webp",
-    "originalPrice": 250,
-    "salePrice": 197.5,
-    "discountPercent": 21,
-    "currency": "AED"
-  },
-  {
-    "id": 14,
-    "name": "Cherry Meadow",
-    "slug": "cherry-meadow",
-    "image": "/fabrics/14-cherry-meadow.webp",
-    "originalPrice": 250,
-    "salePrice": 197.5,
-    "discountPercent": 21,
-    "currency": "AED"
-  },
-  {
-    "id": 15,
-    "name": "Crimson Whisper",
-    "slug": "crimson-whisper",
-    "image": "/fabrics/15-crimson-whisper.webp",
-    "originalPrice": 250,
-    "salePrice": 197.5,
-    "discountPercent": 21,
-    "currency": "AED"
-  },
-  {
-    "id": 16,
-    "name": "tal Mandala",
-    "slug": "tal-mandala",
-    "image": "/fabrics/16-tal-mandala.webp",
-    "originalPrice": 250,
-    "salePrice": 197.5,
-    "discountPercent": 21,
-    "currency": "AED"
-  },
-  {
-    "id": 17,
-    "name": "Blush Petals",
-    "slug": "blush-petals",
-    "image": "/fabrics/17-blush-petals.webp",
-    "originalPrice": 250,
-    "salePrice": 197.5,
-    "discountPercent": 21,
-    "currency": "AED"
-  },
-  {
-    "id": 18,
-    "name": "Vintage Teal Damask",
-    "slug": "vintage-teal-damask",
-    "image": "/fabrics/18-vintage-teal-damask.webp",
-    "originalPrice": 250,
-    "salePrice": 197.5,
-    "discountPercent": 21,
-    "currency": "AED"
-  },
-  {
-    "id": 19,
-    "name": "Peacock Garden",
-    "slug": "peacock-garden",
-    "image": "/fabrics/19-peacock-garden.webp",
-    "originalPrice": 250,
-    "salePrice": 197.5,
-    "discountPercent": 21,
-    "currency": "AED"
-  },
-  {
-    "id": 20,
-    "name": "Golden Hydreangea",
-    "slug": "golden-hydreangea",
-    "image": "/fabrics/20-golden-hydreangea.webp",
-    "originalPrice": 250,
-    "salePrice": 197.5,
-    "discountPercent": 21,
-    "currency": "AED"
-  },
-  {
-    "id": 21,
-    "name": "Frosted Lattice",
-    "slug": "frosted-lattice",
-    "image": "/fabrics/21-frosted-lattice.webp",
-    "originalPrice": 250,
-    "salePrice": 197.5,
-    "discountPercent": 21,
-    "currency": "AED"
-  }
-];
+export const products = [
+  { id: 1, name: "Iris Garden", price: 250, image: "/fabrics/01-iris-garden.webp" },
+  { id: 2, name: "Blush Damask", price: 250, image: "/fabrics/02-blush-damask.webp" },
+  { id: 3, name: "Blue Paisley", price: 250, image: "/fabrics/03-blue-paisley.webp" },
+  { id: 4, name: "Wildflower Meadow", price: 250, image: "/fabrics/04-wildflower-meadow.webp" },
+  { id: 5, name: "Pink Blossom", price: 250, image: "/fabrics/05-pink-blossom.webp" },
+  { id: 6, name: "Sage Botanica", price: 250, image: "/fabrics/06-sage-botanica.webp" },
+  { id: 7, name: "Peacock Garden", price: 250, image: "/fabrics/07-peacock-garden.webp" },
+  { id: 8, name: "Golden Petals", price: 250, image: "/fabrics/08-golden-petals.webp" },
+  { id: 9, name: "Teal Lace", price: 250, image: "/fabrics/09-teal-lace.webp" },
+  { id: 10, name: "Teal Dahlia", price: 250, image: "/fabrics/10-teal-dahlia.webp" },
+  { id: 11, name: "Coral Paisley", price: 250, image: "/fabrics/11-coral-paisley.webp" },
+  { id: 12, name: "Coral Reef", price: 250, image: "/fabrics/12-coral-reef.webp" },
+  { id: 13, name: "Crimson Tulips", price: 250, image: "/fabrics/13-crimson-tulips.webp" },
+  { id: 14, name: "Blue Lily Sketch", price: 250, image: "/fabrics/14-blue-lily-sketch.webp" },
+  { id: 15, name: "Rose Garden", price: 250, image: "/fabrics/15-rose-garden.webp" },
+  { id: 16, name: "Peacock Dreams", price: 250, image: "/fabrics/16-peacock-dreams.webp" },
+  { id: 17, name: "Lavender Meadow", price: 250, image: "/fabrics/17-lavender-meadow.webp" },
+  { id: 18, name: "Pink Hydrangea", price: 250, image: "/fabrics/18-pink-hydrangea.webp" },
+  { id: 19, name: "Blush Peonies", price: 250, image: "/fabrics/19-blush-peonies.webp" },
+  { id: 20, name: "Sage Dahlias", price: 250, image: "/fabrics/20-sage-dahlias.webp" },
+  { id: 21, name: "Pink Botanica", price: 250, image: "/fabrics/21-pink-botanica.webp" },
+  { id: 22, name: "Fuchsia Garden", price: 250, image: "/fabrics/22-fuchsia-garden.webp" },
+  { id: 23, name: "Blush Lilies", price: 250, image: "/fabrics/23-blush-lilies.webp" },
+  { id: 24, name: "Pink Peony Garden", price: 250, image: "/fabrics/24-pink-peony-garden.webp" },
+  { id: 25, name: "Midnight Botanica", price: 250, image: "/fabrics/25-midnight-botanica.webp" },
+  { id: 26, name: "Plum Wildflowers", price: 250, image: "/fabrics/26-plum-wildflowers.webp" },
+  { id: 27, name: "Pastel Bloom", price: 250, image: "/fabrics/27-pastel-bloom.webp" },
+  { id: 28, name: "Tropical Bouquet", price: 250, image: "/fabrics/28-tropical-bouquet.webp" },
+  { id: 29, name: "Blue Meadow", price: 250, image: "/fabrics/29-blue-meadow.webp" },
+  { id: 30, name: "Spring Bouquet", price: 250, image: "/fabrics/30-spring-bouquet.webp" },
+] as const;
