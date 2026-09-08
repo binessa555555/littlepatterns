@@ -122,7 +122,7 @@ if (!response.ok) {
             </h2>
           </div>
           <p className="max-w-md text-sm leading-7 text-[#0b3f7c]/65">
-            Every design was AED 250 and is now AED 197.50 after a 21% discount.
+            
           </p>
         </div>
 
