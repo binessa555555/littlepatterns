@@ -120,7 +120,7 @@ export default function Home() {
 
         <nav className="nav">
           <a href="#fabrics">Fabrics</a>
-          <a href="/our-story">Our Story</a>
+          
 
           <button
             className="iconButton"
