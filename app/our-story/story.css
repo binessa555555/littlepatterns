@@ -1,0 +1,280 @@
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;600&display=swap');
+
+.storyPage {
+  background: #f3efe7;
+  color: #29251f;
+  font-family: "EB Garamond", Georgia, serif;
+}
+
+.storyPage * {
+  box-sizing: border-box;
+}
+
+.storyHero {
+  min-height: 100vh;
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  background:
+    linear-gradient(rgba(20,15,10,.22), rgba(20,15,10,.48)),
+    url("https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=2000&q=85")
+    center/cover;
+  color: white;
+}
+
+.storyHeroOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    rgba(20,15,10,.4),
+    transparent 65%
+  );
+}
+
+.storyNav {
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 28px 5%;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(255,255,255,.4);
+  font-size: 13px;
+  letter-spacing: 2px;
+}
+
+.storyNav a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.storyHeroContent {
+  position: relative;
+  z-index: 1;
+  padding: 9% 8%;
+  max-width: 900px;
+}
+
+.storyEyebrow,
+.smallTitle {
+  font-size: 13px;
+  letter-spacing: 4px;
+}
+
+.storyHero h1 {
+  font-size: clamp(65px, 9vw, 145px);
+  line-height: .78;
+  font-weight: 400;
+  margin: 30px 0 45px;
+}
+
+.storyIntro {
+  font-size: 22px;
+  line-height: 1.6;
+  max-width: 590px;
+}
+
+.scrollText {
+  display: block;
+  margin-top: 70px;
+  font-size: 11px;
+  letter-spacing: 3px;
+}
+
+.storyOpening {
+  min-height: 80vh;
+  text-align: center;
+  padding: 150px 20px;
+  max-width: 850px;
+  margin: auto;
+}
+
+.chapterNumber {
+  font-style: italic;
+  font-size: 25px;
+}
+
+.storyOpening h2,
+.ourBeginning h2,
+.fabricStatement h2,
+.storyEnding h2 {
+  font-size: clamp(55px, 7vw, 105px);
+  font-weight: 400;
+  line-height: .9;
+  margin: 35px 0;
+}
+
+.storyOpening > p:last-child {
+  max-width: 600px;
+  margin: 50px auto 0;
+  font-size: 21px;
+  line-height: 1.8;
+}
+
+.country {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 850px;
+}
+
+.countryImage {
+  position: relative;
+  min-height: 850px;
+  background-size: cover;
+  background-position: center;
+}
+
+.france .countryImage {
+  background-image:
+    linear-gradient(rgba(0,0,0,.08),rgba(0,0,0,.08)),
+    url("https://images.unsplash.com/photo-1499856871958-5b9627545d1a?auto=format&fit=crop&w=1600&q=85");
+}
+
+.italy .countryImage {
+  background-image:
+    linear-gradient(rgba(0,0,0,.08),rgba(0,0,0,.08)),
+    url("https://images.unsplash.com/photo-1529260830199-42c24126f198?auto=format&fit=crop&w=1600&q=85");
+}
+
+.britain .countryImage {
+  background-image:
+    linear-gradient(rgba(0,0,0,.08),rgba(0,0,0,.08)),
+    url("https://images.unsplash.com/photo-1505761671935-60b3a7427bad?auto=format&fit=crop&w=1600&q=85");
+}
+
+.countryLabel {
+  position: absolute;
+  left: 35px;
+  bottom: 35px;
+  color: white;
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  letter-spacing: 3px;
+}
+
+.countryText {
+  padding: 12%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.countryText h2 {
+  font-size: clamp(52px, 6vw, 90px);
+  line-height: .9;
+  font-weight: 400;
+  margin: 30px 0 50px;
+}
+
+.countryText > p:not(.smallTitle) {
+  max-width: 530px;
+  font-size: 20px;
+  line-height: 1.8;
+}
+
+.countryText blockquote {
+  border-left: 1px solid #8e8372;
+  padding-left: 30px;
+  margin: 55px 0 0;
+  font-size: 26px;
+  font-style: italic;
+  max-width: 500px;
+}
+
+.ourBeginning {
+  background: #29251f;
+  color: #eee6da;
+  text-align: center;
+  padding: 180px 20px;
+}
+
+.ourBeginning > p:not(.storyEyebrow) {
+  max-width: 650px;
+  margin: 25px auto;
+  font-size: 22px;
+  line-height: 1.7;
+}
+
+.fabricStory {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  background:
+    linear-gradient(90deg, rgba(245,240,230,.96), rgba(245,240,230,.2)),
+    url("https://images.unsplash.com/photo-1601058268499-e52658b8bb88?auto=format&fit=crop&w=1900&q=85")
+    center/cover;
+}
+
+.fabricStatement {
+  padding: 10%;
+  max-width: 800px;
+}
+
+.fabricStatement p {
+  font-size: 22px;
+  line-height: 1.7;
+  max-width: 570px;
+}
+
+.storyEnding {
+  text-align: center;
+  padding: 180px 20px;
+  background: #ded5c7;
+}
+
+.storyEnding > p {
+  letter-spacing: 6px;
+  font-size: 13px;
+}
+
+.storyButton {
+  display: inline-block;
+  margin-top: 50px;
+  padding: 18px 35px;
+  border: 1px solid #29251f;
+  color: #29251f;
+  text-decoration: none;
+  font-size: 12px;
+  letter-spacing: 3px;
+  transition: .3s;
+}
+
+.storyButton:hover {
+  background: #29251f;
+  color: white;
+}
+
+@media (max-width: 800px) {
+  .country {
+    grid-template-columns: 1fr;
+  }
+
+  .italy .countryText {
+    order: 2;
+  }
+
+  .italy .countryImage {
+    order: 1;
+  }
+
+  .countryImage {
+    min-height: 65vh;
+  }
+
+  .countryText {
+    padding: 90px 8%;
+  }
+
+  .storyNav {
+    padding: 20px;
+    font-size: 9px;
+  }
+
+  .storyHeroContent {
+    padding: 120px 7% 70px;
+  }
+}
