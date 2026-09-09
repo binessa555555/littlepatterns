@@ -10,7 +10,7 @@ export default function Home() {
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [quantity, setQuantity] = useState(1);
 
-  const [cart, setCart] = useState<Product[]>([]);
+  const [cart, setCart] = useState<{ product: Product; quantity: number }[]>([]);
   const [wishlist, setWishlist] = useState<string[]>([]);
 
   const [searchOpen, setSearchOpen] = useState(false);
@@ -38,16 +38,53 @@ export default function Home() {
   }
 
   function addToCart(product: Product, qty = 1) {
-    const additions = Array.from({ length: qty }, () => product);
-    setCart((current) => [...current, ...additions]);
+    setCart((current) => {
+      const existing = current.find(
+        (item) => item.product.name === product.name
+      );
+
+      if (existing) {
+        return current.map((item) =>
+          item.product.name === product.name
+            ? { ...item, quantity: item.quantity + qty }
+            : item
+        );
+      }
+
+      return [...current, { product, quantity: qty }];
+    });
   }
+
+  function changeCartQuantity(productName: string, change: number) {
+    setCart((current) =>
+      current
+        .map((item) =>
+          item.product.name === productName
+            ? { ...item, quantity: item.quantity + change }
+            : item
+        )
+        .filter((item) => item.quantity > 0)
+    );
+  }
+
+  function removeFromCart(productName: string) {
+    setCart((current) =>
+      current.filter((item) => item.product.name !== productName)
+    );
+  }
+
+  const cartCount = cart.reduce(
+    (total, item) => total + item.quantity,
+    0
+  );
+
+  const cartTotal = cart.reduce(
+    (total, item) => total + item.quantity * 250,
+    0
+  );
 
   async function checkout() {
     if (cart.length === 0) return;
-
-    // Checkout each selected product using your existing Ziina endpoint.
-    // For now we group checkout by the first item.
-    const first = cart[0];
 
     const response = await fetch("/api/checkout", {
       method: "POST",
@@ -55,8 +92,10 @@ export default function Home() {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        name: first.name,
-        quantity: cart.length,
+        items: cart.map((item) => ({
+          name: item.product.name,
+          quantity: item.quantity,
+        })),
       }),
     });
 
@@ -117,8 +156,8 @@ export default function Home() {
             aria-label="Cart"
           >
             🛍
-            {cart.length > 0 && (
-              <span className="counter">{cart.length}</span>
+            {cartCount > 0 && (
+              <span className="counter">{cartCount}</span>
             )}
           </button>
         </nav>
@@ -246,10 +285,7 @@ export default function Home() {
           </h2>
         </div>
 
-        <p>
-          Thirty distinctive prints. Endless ways to create. Discover the
-          pattern that makes your next piece unmistakably yours.
-        </p>
+
       </section>
 
       {/* WISHLIST */}
@@ -289,17 +325,121 @@ export default function Home() {
       {/* CART */}
       {cart.length > 0 && (
         <section id="cart" className="cartSection">
-          <div>
+          <div style={{ width: "100%" }}>
             <p className="eyebrow">YOUR BAG</p>
-            <h2>
-              {cart.length} {cart.length === 1 ? "fabric" : "fabrics"}
-            </h2>
-            <p>AED {(cart.length * 250).toFixed(2)}</p>
-          </div>
+            <h2>Your Selection</h2>
 
-          <button className="checkoutButton" onClick={checkout}>
-            Checkout
-          </button>
+            <div style={{ marginTop: "25px" }}>
+              {cart.map((item) => (
+                <div
+                  key={item.product.name}
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    gap: "20px",
+                    padding: "20px 0",
+                    borderBottom: "1px solid #d5ddd5",
+                    flexWrap: "wrap",
+                  }}
+                >
+                  <div style={{ display: "flex", alignItems: "center", gap: "18px" }}>
+                    <div
+                      style={{
+                        width: "80px",
+                        height: "95px",
+                        position: "relative",
+                        background: "white",
+                        borderRadius: "12px",
+                        overflow: "hidden",
+                      }}
+                    >
+                      <Image
+                        src={item.product.image}
+                        alt={item.product.name}
+                        fill
+                        className="productImage"
+                      />
+                    </div>
+
+                    <div>
+                      <h3 style={{ margin: "0 0 5px" }}>
+                        {item.product.name}
+                      </h3>
+                      <span>AED 250.00 each</span>
+                    </div>
+                  </div>
+
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "15px",
+                    }}
+                  >
+                    <div className="quantity">
+                      <button
+                        onClick={() =>
+                          changeCartQuantity(item.product.name, -1)
+                        }
+                      >
+                        −
+                      </button>
+
+                      <span>{item.quantity}</span>
+
+                      <button
+                        onClick={() =>
+                          changeCartQuantity(item.product.name, 1)
+                        }
+                      >
+                        +
+                      </button>
+                    </div>
+
+                    <strong>
+                      AED {(item.quantity * 250).toFixed(2)}
+                    </strong>
+
+                    <button
+                      onClick={() => removeFromCart(item.product.name)}
+                      style={{
+                        border: "none",
+                        background: "transparent",
+                        textDecoration: "underline",
+                        cursor: "pointer",
+                        color: "#777",
+                      }}
+                    >
+                      Remove
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+                marginTop: "30px",
+                gap: "20px",
+                flexWrap: "wrap",
+              }}
+            >
+              <div>
+                <div>{cartCount} items</div>
+                <strong style={{ fontSize: "24px" }}>
+                  Total: AED {cartTotal.toFixed(2)}
+                </strong>
+              </div>
+
+              <button className="checkoutButton" onClick={checkout}>
+                Checkout
+              </button>
+            </div>
+          </div>
         </section>
       )}
 
