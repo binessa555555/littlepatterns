@@ -494,21 +494,23 @@ export default function Home() {
 
               {/* IMAGE 2 - CLOSE UP */}
               <div className="modalImageCard closeupCard">
-                <span className="imageNumber">2 / 2 • CLOSE-UP</span>
+                <span className="imageNumber">2 / 2</span>
 
                 <div className="zoomContainer">
                   <Image
-                    src={selectedProduct.image}
-                    alt={`${selectedProduct.name} close-up`}
+                    src={`/model-fabrics/fabric-${String(
+                      products.findIndex(
+                        (p) => p.name === selectedProduct.name
+                      ) + 1
+                    ).padStart(2, "0")}.jpg`}
+                    alt={`${selectedProduct.name} model`}
                     fill
                     className="zoomImage"
                     sizes="50vw"
                   />
                 </div>
 
-                <p className="zoomHint">
-                  Move over the image to view the fabric closely.
-                </p>
+
               </div>
             </div>
 
