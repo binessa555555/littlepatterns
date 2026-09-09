@@ -714,3 +714,18 @@ a {
 .productSideImage .productImage {
   object-fit: cover;
 }
+
+
+/* Full second image inside product popup */
+.secondModelImage {
+  object-fit: contain !important;
+  object-position: center center !important;
+  transform: none !important;
+  scale: 1 !important;
+}
+
+/* Disable old hover zoom on second image */
+.zoomContainer:hover .secondModelImage {
+  transform: none !important;
+  scale: 1 !important;
+}

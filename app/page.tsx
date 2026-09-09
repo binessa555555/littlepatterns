@@ -221,29 +221,13 @@ export default function Home() {
                   className="imageBox"
                   onClick={() => openProduct(product)}
                 >
-                  <div className="productSideBySide">
-                    <div className="productSideImage">
-                      <Image
-                        src={product.image}
-                        alt={product.name}
-                        fill
-                        className="productImage"
-                        sizes="(max-width: 700px) 50vw, 17vw"
-                      />
-                    </div>
-
-                    <div className="productSideImage">
-                      <Image
-                        src={`/model-fabrics/fabric-${String(
-                          products.findIndex((p) => p.name === product.name) + 1
-                        ).padStart(2, "0")}.jpg`}
-                        alt={`${product.name} model`}
-                        fill
-                        className="productImage"
-                        sizes="(max-width: 700px) 50vw, 17vw"
-                      />
-                    </div>
-                  </div>
+                  <Image
+                    src={product.image}
+                    alt={product.name}
+                    fill
+                    className="productImage"
+                    sizes="(max-width: 700px) 100vw, 33vw"
+                  />
 
                   <button
                     className={`heartButton ${liked ? "liked" : ""}`}
@@ -505,7 +489,7 @@ export default function Home() {
                     ).padStart(2, "0")}.jpg`}
                     alt={`${selectedProduct.name} model`}
                     fill
-                    className="zoomImage"
+                    className="secondModelImage"
                     sizes="50vw"
                   />
                 </div>
