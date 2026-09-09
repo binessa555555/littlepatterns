@@ -12,188 +12,208 @@ export default function OurStoryPage() {
         <nav className="storyNav">
           <Link href="/">← Little Patterns</Link>
           <span>OUR STORY</span>
-          <Link href="/#collection">Explore Fabrics</Link>
+          <Link href="/#fabrics">Explore Fabrics</Link>
         </nav>
 
         <div className="storyHeroContent">
           <p className="storyEyebrow">LITTLE PATTERNS</p>
-          <h1>A Story<br />Woven Through Time</h1>
+
+          <h1>
+            It Starts<br />
+            With a Pattern
+          </h1>
+
           <p className="storyIntro">
-            Before a fabric becomes a dress, it begins as an idea.
-            A colour remembered. A garden passed on an afternoon walk.
-            A detail that stays with you.
+            We believe the right fabric can be the beginning of
+            something completely your own.
           </p>
 
-          <span className="scrollText">SCROLL TO DISCOVER ↓</span>
+          <span className="scrollText">OUR STORY ↓</span>
         </div>
       </section>
 
 
-      {/* INTRO */}
+      {/* WHY LITTLE PATTERNS */}
       <section className="storyOpening">
         <p className="chapterNumber">I</p>
 
         <h2>
-          Every pattern<br />
-          begins somewhere.
+          We fell in love<br />
+          with the possibilities.
         </h2>
 
         <p>
-          Little Patterns was born from a fascination with the places,
-          objects and memories that make beautiful design feel timeless.
-          Not one era. Not one country. But generations of colour,
-          craftsmanship and imagination.
+          Little Patterns began with a simple idea: finding beautiful
+          fabrics should feel inspiring.
+        </p>
+
+        <p>
+          We wanted to create a collection where every pattern could
+          spark an idea — a dress imagined for an occasion, an abaya
+          made differently, or a piece designed simply because you
+          could already picture it the moment you saw the fabric.
         </p>
       </section>
 
 
-      {/* FRANCE */}
+      {/* INSPIRATION */}
       <section className="country france">
         <div className="countryImage">
           <div className="countryLabel">
             <span>01</span>
-            <p>FRANCE</p>
+            <p>INSPIRATION</p>
           </div>
         </div>
 
         <div className="countryText">
-          <p className="smallTitle">THE ROMANCE OF PATTERN</p>
+          <p className="smallTitle">WHERE WE LOOK</p>
 
           <h2>
-            Where flowers<br />
-            became stories.
+            Inspiration<br />
+            is everywhere.
           </h2>
 
           <p>
-            In France, inspiration lives quietly. In gardens growing
-            beyond their borders. In faded wallpapers. In botanical
-            drawings preserved between the pages of old books.
+            A garden in the south of France. The colours of an old
+            Italian interior. A floral wallpaper in an English country
+            house. A painting, a dress, a photograph, or even a detail
+            noticed for only a moment.
           </p>
 
           <p>
-            From these details came our appreciation for florals that
-            feel effortless rather than perfect — petals, leaves and
-            ornamental forms arranged with the softness of something
-            remembered.
+            We are drawn to patterns with character — florals,
+            botanicals, paisleys and expressive colour combinations
+            that feel beautiful without feeling ordinary.
           </p>
 
           <blockquote>
-            “Some patterns are not designed to be noticed first.
-            They are designed to be remembered.”
+            “Sometimes one pattern is enough to imagine the entire piece.”
           </blockquote>
         </div>
       </section>
 
 
-      {/* ITALY */}
+      {/* CHOOSING */}
       <section className="country italy">
         <div className="countryText">
-          <p className="smallTitle">THE ART OF LIVING BEAUTIFULLY</p>
+          <p className="smallTitle">THE COLLECTION</p>
 
           <h2>
-            Colour without<br />
-            apology.
+            Chosen with<br />
+            a purpose.
           </h2>
 
           <p>
-            Italy brought something different to our story: confidence.
-            Rich colour, expressive ornament and the belief that
-            beautiful things should be lived in, touched and worn —
-            not simply admired from a distance.
+            We do not want Little Patterns to feel like an endless
+            catalogue of fabric.
           </p>
 
           <p>
-            It inspired the bolder side of Little Patterns. Prints with
-            movement. Colours with presence. Fabrics created for pieces
-            that enter a room before a word is spoken.
+            Each design is chosen because we can imagine what it could
+            become. We look for colour, detail and patterns that can
+            stand beautifully on their own while still leaving room
+            for your creativity.
+          </p>
+
+          <p>
+            Some are soft and romantic. Some are bold. Some feel
+            timeless. They do not need to look alike — they only need
+            to make you want to create.
           </p>
         </div>
 
         <div className="countryImage">
           <div className="countryLabel">
             <span>02</span>
-            <p>ITALY</p>
+            <p>THE DETAILS</p>
           </div>
         </div>
       </section>
 
 
-      {/* BRITAIN */}
+      {/* CUSTOMER */}
       <section className="country britain">
         <div className="countryImage">
           <div className="countryLabel">
             <span>03</span>
-            <p>BRITAIN</p>
+            <p>YOUR IDEA</p>
           </div>
         </div>
 
         <div className="countryText">
-          <p className="smallTitle">BEAUTY THAT AGES WELL</p>
+          <p className="smallTitle">WHAT COMES NEXT</p>
 
           <h2>
-            Made for more<br />
-            than one season.
+            The fabric is<br />
+            only the beginning.
           </h2>
 
           <p>
-            British country houses, antique wallpapers and gardens
-            taught us another lesson: beautiful pattern does not need
-            to belong to a moment.
+            We choose the pattern. You decide what it becomes.
           </p>
 
           <p>
-            The most memorable designs become richer with time.
-            Florals soften. Colours become familiar. A pattern becomes
-            connected to a place, a person, a memory.
+            The same fabric can become completely different pieces in
+            different hands. An elegant dress. A flowing abaya. A
+            kaftan. A statement piece made for one particular moment.
+          </p>
+
+          <p>
+            That is what we love most about fabric: before it is cut,
+            it is full of possibilities.
           </p>
 
           <blockquote>
-            “Timeless does not mean old. It means worth keeping.”
+            “Your idea is what gives the pattern its final form.”
           </blockquote>
         </div>
       </section>
 
 
-      {/* TRANSITION */}
+      {/* BRAND */}
       <section className="ourBeginning">
-        <p className="storyEyebrow">AND THEN</p>
+        <p className="storyEyebrow">LITTLE PATTERNS</p>
 
         <h2>
-          Our story<br />
-          begins.
+          Small details.<br />
+          Beautiful beginnings.
         </h2>
 
         <p>
-          Little Patterns brings these influences together without
-          trying to recreate the past.
+          The name Little Patterns comes from the details we notice
+          first — the small flowers, lines, colours and shapes that
+          together can completely change a piece.
         </p>
 
         <p>
-          We take the romance, character and confidence of old
-          European design and reinterpret them as fabrics made for
-          something entirely new.
+          We created Little Patterns for people who see a fabric and
+          immediately begin imagining what they could make from it.
         </p>
       </section>
 
 
-      {/* FABRIC STATEMENT */}
+      {/* FINAL */}
       <section className="fabricStory">
         <div className="fabricStatement">
           <p className="chapterNumber">IV</p>
 
           <h2>
-            From pattern<br />
-            to possibility.
+            From our collection<br />
+            to your creation.
           </h2>
 
           <p>
-            To us, every roll of fabric is unfinished.
+            We provide the starting point.
           </p>
 
           <p>
-            Its final chapter belongs to the person who chooses it —
-            transformed into a dress, an abaya, a kaftan, or something
-            we could never have imagined ourselves.
+            What happens next belongs to you — your measurements,
+            your style, your occasion and your imagination.
+          </p>
+
+          <p>
+            No two ideas have to be the same. And that is exactly
+            the point.
           </p>
         </div>
       </section>
@@ -204,12 +224,12 @@ export default function OurStoryPage() {
         <p>LITTLE PATTERNS</p>
 
         <h2>
-          Made to inspire<br />
-          what comes next.
+          Find the pattern<br />
+          that starts your idea.
         </h2>
 
-        <Link href="/#collection" className="storyButton">
-          EXPLORE THE COLLECTION
+        <Link href="/#fabrics" className="storyButton">
+          EXPLORE THE FABRICS
         </Link>
       </section>
 
