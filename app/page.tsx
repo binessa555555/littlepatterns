@@ -430,12 +430,43 @@ export default function Home() {
             >
               <div>
                 <div>{cartCount} items</div>
-                <strong style={{ fontSize: "24px" }}>
-                  Total: AED {cartTotal.toFixed(2)}
+
+                <div style={{ marginTop: "10px", fontSize: "16px" }}>
+                  Fabrics: AED {cartTotal.toFixed(2)}
+                </div>
+
+                <div style={{ fontSize: "16px" }}>
+                  Delivery: AED 25.00
+                </div>
+
+                <strong
+                  style={{
+                    fontSize: "24px",
+                    display: "block",
+                    marginTop: "8px"
+                  }}
+                >
+                  Total: AED {(cartTotal + 25).toFixed(2)}
                 </strong>
               </div>
 
-              <button className="checkoutButton" onClick={checkout}>
+              <button
+                className="checkoutButton"
+                onClick={() => {
+                  sessionStorage.setItem(
+                    "littlePatternsCart",
+                    JSON.stringify(
+                      cart.map((item) => ({
+                        name: item.product.name,
+                        quantity: item.quantity,
+                        image: item.product.image
+                      }))
+                    )
+                  );
+
+                  window.location.href = "/checkout";
+                }}
+              >
                 Checkout
               </button>
             </div>

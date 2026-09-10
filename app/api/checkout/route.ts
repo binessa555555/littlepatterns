@@ -35,7 +35,8 @@ export async function POST(request: Request) {
       0
     );
 
-    const amount = totalQuantity * 25000;
+    // AED 250 per fabric + AED 25 delivery
+    const amount = (totalQuantity * 25000) + 2500;
 
     const orderSummary = cleanItems
       .map((item: { name: string; quantity: number }) => `${item.name} x ${item.quantity}`)
