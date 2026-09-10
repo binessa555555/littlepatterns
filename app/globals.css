@@ -862,3 +862,38 @@ footer {
   background: var(--lp-blue);
   color: #ffffff;
 }
+
+/* LITTLE PATTERNS — DARKER LOGO COLORS ONLY */
+:root {
+  --lp-mint: #C8E2D5 !important;
+  --lp-mint-soft: #DDEDE5 !important;
+  --lp-blue: #06377D !important;
+  --lp-blue-dark: #042A60 !important;
+}
+
+html,
+body,
+.header {
+  background-color: var(--lp-mint-soft) !important;
+}
+
+body,
+.nav a,
+.iconButton,
+h1,
+h2,
+h3,
+h4 {
+  color: var(--lp-blue-dark) !important;
+}
+
+.brand,
+.brandFlower,
+.eyebrow {
+  color: var(--lp-blue) !important;
+}
+
+.checkoutButton {
+  background-color: var(--lp-blue) !important;
+  border-color: var(--lp-blue) !important;
+}
