@@ -897,3 +897,11 @@ h4 {
   background-color: var(--lp-blue) !important;
   border-color: var(--lp-blue) !important;
 }
+
+/* FOOTER — WHITE TEXT */
+footer,
+.footer,
+footer *,
+.footer * {
+  color: #ffffff !important;
+}
