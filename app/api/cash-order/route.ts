@@ -157,6 +157,57 @@ export async function POST(request: Request) {
       `,
     });
 
+    // Record order in Google Sheets
+    const googleOrdersUrl = process.env.GOOGLE_ORDERS_URL;
+
+    if (googleOrdersUrl) {
+      try {
+        const itemsSummary = cleanItems
+          .map(
+            (item: { name: string; quantity: number }) =>
+              `${item.name} x ${item.quantity}`
+          )
+          .join(", ");
+
+        const sheetResponse = await fetch(googleOrdersUrl, {
+          method: "POST",
+          headers: {
+            "Content-Type": "text/plain;charset=utf-8",
+          },
+          body: JSON.stringify({
+            orderNumber,
+            customer: `${customer.firstName} ${customer.lastName || ""}`.trim(),
+            phone: customer.phone || "",
+            email: customer.email || "",
+            address: customer.address || "",
+            city: customer.city || "",
+            area: customer.area || "",
+            items: itemsSummary,
+            subtotal: fabricTotal,
+            delivery: 25,
+            total,
+            payment: "Cash on Delivery",
+            status: "New",
+            notes: customer.notes || "",
+          }),
+        });
+
+        if (!sheetResponse.ok) {
+          console.error(
+            "Google Sheets returned:",
+            sheetResponse.status
+          );
+        } else {
+          console.log("Order recorded in Google Sheets:", orderNumber);
+        }
+      } catch (sheetError) {
+        // Do not lose a real customer order if Sheets is temporarily unavailable.
+        console.error("Google Sheets recording error:", sheetError);
+      }
+    } else {
+      console.error("GOOGLE_ORDERS_URL is missing");
+    }
+
     return NextResponse.json({
       success: true,
       orderNumber,
