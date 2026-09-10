@@ -738,3 +738,19 @@ a {
   vertical-align: 0.04em;
   line-height: 1;
 }
+
+/* Little Patterns final logo */
+.brand {
+  font-family: "EB Garamond", Georgia, serif !important;
+  font-size: 30px !important;
+  font-weight: 500 !important;
+  letter-spacing: 0 !important;
+  white-space: nowrap;
+}
+
+.brand .brandFlower {
+  display: inline !important;
+  font-size: 0.8em !important;
+  margin: 0 !important;
+  vertical-align: 0.04em;
+}
