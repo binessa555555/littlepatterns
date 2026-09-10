@@ -114,7 +114,7 @@ export default function Home() {
       {/* HEADER */}
       <header className="header">
         <a href="#" className="brand">
-          Little<span className="brandFlower">❋</span>Patterns
+          <span className="brandWord">Little</span><span className="brandFlower">❋</span><span className="brandWord">Patterns</span>
         </a>
 
         <nav className="nav">

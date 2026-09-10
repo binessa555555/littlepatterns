@@ -754,3 +754,33 @@ a {
   margin: 0 !important;
   vertical-align: 0.04em;
 }
+
+/* FINAL LITTLE PATTERNS LOGO */
+.header .brand {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 2px !important;
+  white-space: nowrap !important;
+  text-decoration: none !important;
+  font-family: "EB Garamond", Georgia, serif !important;
+  font-size: 31px !important;
+  font-weight: 500 !important;
+  line-height: 1 !important;
+  letter-spacing: -0.6px !important;
+}
+
+.header .brandWord {
+  display: inline-block !important;
+  font: inherit !important;
+  line-height: 1 !important;
+}
+
+.header .brandFlower {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-size: 23px !important;
+  line-height: 1 !important;
+  margin: 0 1px !important;
+  transform: translateY(1px);
+}
