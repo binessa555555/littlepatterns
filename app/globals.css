@@ -966,29 +966,3 @@ footer *,
     font-size: 15px;
   }
 }
-
-/* TEMPORARY BLACK CURTAIN */
-body::before {
-  content: "LITTLE PATTERNS\A\A I DID IT.\A COMING SOON";
-  white-space: pre-line;
-  position: fixed;
-  inset: 0;
-  width: 100vw;
-  height: 100vh;
-  background: #050505;
-  color: #ffffff;
-  z-index: 9999999;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  font-family: "EB Garamond", Georgia, serif;
-  font-size: clamp(18px, 2vw, 28px);
-  line-height: 2;
-  letter-spacing: 3px;
-}
-
-html,
-body {
-  overflow: hidden !important;
-}
