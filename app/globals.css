@@ -729,3 +729,12 @@ a {
   transform: none !important;
   scale: 1 !important;
 }
+
+/* Little Patterns logo */
+.brandFlower {
+  display: inline-block !important;
+  font-size: 0.82em !important;
+  margin: 0 4px;
+  vertical-align: 0.04em;
+  line-height: 1;
+}

@@ -114,7 +114,8 @@ export default function Home() {
       {/* HEADER */}
       <header className="header">
         <a href="#" className="brand">
-          <span style={{ fontSize: "42px", lineHeight: "1" }}>❋</span>
+          Little <span className="brandFlower">❋</span> Patterns
+          <span>PREMIÈRE FABRICS</span>
         </a>
 
         <nav className="nav">
