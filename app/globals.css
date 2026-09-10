@@ -905,3 +905,11 @@ footer *,
 .footer * {
   color: #ffffff !important;
 }
+
+/* BOTTOM LITTLE PATTERNS SECTION — WHITE TEXT */
+.storySection,
+.storySection *,
+#story,
+#story * {
+  color: #ffffff !important;
+}
