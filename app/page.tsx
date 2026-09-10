@@ -532,6 +532,34 @@ export default function Home() {
               <div>
                 <p className="eyebrow">LITTLE PATTERNS</p>
                 <h2>{selectedProduct.name}</h2>
+              <div className="fabricDetails">
+                <h3>Description</h3>
+
+                <div className="fabricDetailRow">
+                  <span>Material</span>
+                  <strong>Tana Lawn Cotton</strong>
+                </div>
+                <div className="fabricDetailRow">
+                  <span>Size</span>
+                  <strong>3 Meters</strong>
+                </div>
+                <div className="fabricDetailRow">
+                  <span>Width</span>
+                  <strong>Double Width</strong>
+                </div>
+                <div className="fabricDetailRow">
+                  <span>Weight</span>
+                  <strong>Lightweight</strong>
+                </div>
+                <div className="fabricDetailRow">
+                  <span>Feel</span>
+                  <strong>Soft</strong>
+                </div>
+
+                <p className="fabricNote">
+                  <strong>Note:</strong> Fabric should be washed before sewing
+                </p>
+              </div>
                 <p className="modalPrice">AED 250.00</p>
               </div>
 
