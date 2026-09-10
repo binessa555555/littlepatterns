@@ -1,100 +1,175 @@
 import { NextResponse } from "next/server";
+import nodemailer from "nodemailer";
 
 export async function POST(request: Request) {
   try {
-    const body = await request.json();
-    const { customer, items = [] } = body;
+    const { customer, items = [] } = await request.json();
 
-    if (!customer?.firstName || !customer?.phone || !customer?.address) {
+    if (
+      !customer?.firstName ||
+      !customer?.phone ||
+      !customer?.address ||
+      !Array.isArray(items) ||
+      items.length === 0
+    ) {
       return NextResponse.json(
-        { error: "Missing customer details" },
+        { error: "Missing order information" },
         { status: 400 }
       );
     }
 
-    if (!Array.isArray(items) || items.length === 0) {
-      return NextResponse.json(
-        { error: "Your cart is empty" },
-        { status: 400 }
-      );
-    }
-
-    const cleanItems = items.map((item: any) => ({
-      name: String(item.name || "Fabric"),
-      quantity: Math.max(1, Math.floor(Number(item.quantity) || 1)),
-    }));
+    const cleanItems = items.map(
+      (item: { name?: string; quantity?: number }) => ({
+        name: String(item.name || "Little Patterns Fabric"),
+        quantity: Math.max(
+          1,
+          Math.floor(Number(item.quantity) || 1)
+        ),
+      })
+    );
 
     const fabricTotal = cleanItems.reduce(
-      (sum: number, item: any) => sum + item.quantity * 250,
+      (total: number, item: { name: string; quantity: number }) =>
+        total + item.quantity * 250,
       0
     );
 
-    const total = fabricTotal + 25;
+    const delivery = 25;
+    const total = fabricTotal + delivery;
 
-    const orderLines = cleanItems
-      .map((item: any) =>
-        `${item.name} x ${item.quantity} — AED ${item.quantity * 250}`
+    const orderNumber = `LP-${Date.now()
+      .toString()
+      .slice(-8)}`;
+
+    const orderRows = cleanItems
+      .map(
+        (item: { name: string; quantity: number }) => `
+          <tr>
+            <td style="padding:10px;border-bottom:1px solid #ddd;">
+              ${item.name}
+            </td>
+            <td style="padding:10px;border-bottom:1px solid #ddd;text-align:center;">
+              ${item.quantity}
+            </td>
+            <td style="padding:10px;border-bottom:1px solid #ddd;text-align:right;">
+              AED ${(item.quantity * 250).toFixed(2)}
+            </td>
+          </tr>
+        `
       )
-      .join("\n");
+      .join("");
 
-    const emailText = `
-NEW LITTLE PATTERNS ORDER
-
-PAYMENT: CASH ON DELIVERY
-
-CUSTOMER
-${customer.firstName} ${customer.lastName}
-Phone: ${customer.phone}
-Email: ${customer.email}
-
-DELIVERY
-${customer.address}
-${customer.area}
-${customer.city}
-United Arab Emirates
-
-ORDER
-${orderLines}
-
-Fabrics: AED ${fabricTotal.toFixed(2)}
-Delivery: AED 25.00
-TOTAL: AED ${total.toFixed(2)}
-
-Notes:
-${customer.notes || "None"}
-`;
-
-    const resendResponse = await fetch("https://api.resend.com/emails", {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${process.env.RESEND_API_KEY}`,
-        "Content-Type": "application/json",
+    const transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: process.env.GMAIL_USER,
+        pass: process.env.GMAIL_APP_PASSWORD,
       },
-      body: JSON.stringify({
-        from: "Little Patterns <onboarding@resend.dev>",
-        to: ["littlepatterns.ae@gmail.com"],
-        subject: `NEW CASH ORDER — AED ${total.toFixed(2)}`,
-        text: emailText,
-      }),
     });
 
-    const emailData = await resendResponse.json();
+    await transporter.sendMail({
+      from: `"Little Patterns Orders" <${process.env.GMAIL_USER}>`,
+      to: "littlepatterns.ae@gmail.com",
+      replyTo: customer.email || undefined,
 
-    if (!resendResponse.ok) {
-      console.error("Order email failed:", emailData);
+      subject:
+        `NEW ORDER ${orderNumber} — CASH — AED ${total.toFixed(2)}`,
 
-      return NextResponse.json(
-        { error: "Order email could not be sent" },
-        { status: 500 }
-      );
-    }
+      html: `
+        <div style="
+          font-family:Arial,sans-serif;
+          max-width:700px;
+          margin:auto;
+          color:#222;
+        ">
 
-    return NextResponse.json({ success: true });
+          <h1>New Little Patterns Order</h1>
+
+          <p><strong>Order:</strong> ${orderNumber}</p>
+
+          <p style="
+            display:inline-block;
+            background:#eee7dc;
+            padding:8px 14px;
+          ">
+            CASH ON DELIVERY
+          </p>
+
+          <h2>Customer</h2>
+
+          <p>
+            <strong>Name:</strong>
+            ${customer.firstName} ${customer.lastName || ""}
+          </p>
+
+          <p>
+            <strong>Phone:</strong>
+            ${customer.phone}
+          </p>
+
+          <p>
+            <strong>Email:</strong>
+            ${customer.email || "Not provided"}
+          </p>
+
+          <h2>Delivery Address</h2>
+
+          <p>
+            ${customer.address}<br/>
+            ${customer.area || ""}<br/>
+            ${customer.city || ""}<br/>
+            United Arab Emirates
+          </p>
+
+          <h2>Order</h2>
+
+          <table style="
+            width:100%;
+            border-collapse:collapse;
+          ">
+            <tr>
+              <th style="text-align:left;padding:10px;">Fabric</th>
+              <th style="padding:10px;">Qty</th>
+              <th style="text-align:right;padding:10px;">Price</th>
+            </tr>
+
+            ${orderRows}
+          </table>
+
+          <div style="
+            margin-top:25px;
+            text-align:right;
+            font-size:16px;
+          ">
+            <p>Fabrics: AED ${fabricTotal.toFixed(2)}</p>
+            <p>Delivery: AED 25.00</p>
+
+            <h2>
+              TOTAL: AED ${total.toFixed(2)}
+            </h2>
+          </div>
+
+          <h2>Customer Notes</h2>
+
+          <p>${customer.notes || "No notes"}</p>
+
+        </div>
+      `,
+    });
+
+    return NextResponse.json({
+      success: true,
+      orderNumber,
+    });
+
   } catch (error) {
     console.error("Cash order error:", error);
 
     return NextResponse.json(
-      { error: "Unable to place order" },
+      {
+        error:
+          "Order could not be sent. Please try again.",
+      },
       { status: 500 }
     );
   }
