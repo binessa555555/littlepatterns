@@ -785,222 +785,80 @@ a {
   transform: translateY(1px);
 }
 
-/* ==================================================
-   LITTLE PATTERNS — LOGO INSPIRED THEME
-   Mint / Royal Blue / Vintage Boutique
-   ================================================== */
-
+/* LITTLE PATTERNS — COLOR ONLY */
 :root {
-  --lp-mint: #dcefe4;
-  --lp-mint-light: #edf7f1;
-  --lp-cream: #f8f6ef;
-  --lp-blue: #073f8c;
-  --lp-blue-dark: #052e68;
-  --lp-border: rgba(7, 63, 140, 0.22);
+  --lp-mint: #DDEFE6;
+  --lp-mint-soft: #F0F7F3;
+  --lp-blue: #073F8C;
+  --lp-blue-dark: #052F6B;
 }
 
-/* MAIN WEBSITE */
+/* Backgrounds */
 html,
 body {
-  background: var(--lp-mint-light) !important;
+  background-color: var(--lp-mint-soft) !important;
+}
+
+/* Main text */
+body {
   color: var(--lp-blue-dark) !important;
 }
 
-.site {
-  background:
-    linear-gradient(
-      180deg,
-      var(--lp-mint-light) 0%,
-      #ffffff 42%,
-      var(--lp-mint-light) 100%
-    ) !important;
-  color: var(--lp-blue-dark) !important;
-}
-
-/* HEADER */
+/* Header */
 .header {
-  background: rgba(237, 247, 241, 0.96) !important;
-  border-bottom: 1px solid var(--lp-border) !important;
-  backdrop-filter: blur(14px);
+  background-color: var(--lp-mint-soft) !important;
+  border-color: rgba(7, 63, 140, 0.18) !important;
 }
 
-.header .brand {
+/* Logo */
+.brand,
+.brandFlower {
   color: var(--lp-blue) !important;
 }
 
-.header .brandFlower {
-  color: var(--lp-blue) !important;
-}
-
+/* Navigation + icons */
 .nav a,
 .iconButton {
   color: var(--lp-blue-dark) !important;
 }
 
-/* HERO */
-.hero {
-  background:
-    radial-gradient(
-      circle at 50% 20%,
-      #ffffff 0%,
-      var(--lp-mint-light) 55%,
-      var(--lp-mint) 100%
-    ) !important;
-}
-
-.hero h1,
-.hero h2,
-.heroTitle {
+/* Main headings */
+h1,
+h2,
+h3,
+h4 {
   color: var(--lp-blue-dark) !important;
 }
 
-.hero p,
-.heroText {
-  color: #31577d !important;
-}
-
-/* EYEBROW / SMALL LABELS */
+/* Small accent text */
 .eyebrow {
   color: var(--lp-blue) !important;
-  letter-spacing: 0.22em !important;
 }
 
-/* PRIMARY BUTTONS */
-button,
-.primaryButton,
+/* Main buttons */
 .checkoutButton {
-  border-radius: 2px !important;
-}
-
-.primaryButton,
-.checkoutButton {
-  background: var(--lp-blue) !important;
-  color: white !important;
-  border: 1px solid var(--lp-blue) !important;
-}
-
-.primaryButton:hover,
-.checkoutButton:hover {
-  background: var(--lp-blue-dark) !important;
-}
-
-/* EXPLORE COLLECTION */
-.hero a,
-.hero button {
+  background-color: var(--lp-blue) !important;
   border-color: var(--lp-blue) !important;
+  color: #ffffff !important;
 }
 
-/* PRODUCT AREA */
-#fabrics,
-.productsSection,
-.collectionSection {
-  background: #fff !important;
-}
-
-.productCard {
-  background: #ffffff !important;
-  border: 1px solid var(--lp-border) !important;
-  box-shadow: 0 10px 35px rgba(7, 63, 140, 0.05) !important;
-}
-
-.productCard:hover {
-  border-color: rgba(7, 63, 140, 0.5) !important;
-  box-shadow: 0 18px 45px rgba(7, 63, 140, 0.11) !important;
-}
-
-.productCard h3,
-.productCard strong {
-  color: var(--lp-blue-dark) !important;
-}
-
-/* PRODUCT IMAGES */
-.imageBox {
-  background: var(--lp-mint-light) !important;
-}
-
-/* HEART / WISHLIST */
-.wishlistButton,
-.heartButton {
-  color: var(--lp-blue) !important;
-  border-color: var(--lp-border) !important;
-}
-
-/* PRODUCT VIEWER */
-.modalOverlay {
-  background: rgba(3, 28, 61, 0.72) !important;
-  backdrop-filter: blur(7px);
-}
-
+/* Borders */
+.productCard,
 .modalContent,
-.productModal {
-  background: var(--lp-cream) !important;
-  color: var(--lp-blue-dark) !important;
-  border: 1px solid var(--lp-border) !important;
-}
-
-/* CART */
-.cartSection,
-.cartPanel,
-.cartDrawer {
-  background: var(--lp-mint-light) !important;
-  color: var(--lp-blue-dark) !important;
-}
-
-.cartItem {
-  border-color: var(--lp-border) !important;
-}
-
-/* INPUTS */
 input,
 textarea,
 select {
-  background: #ffffff !important;
-  color: var(--lp-blue-dark) !important;
-  border: 1px solid var(--lp-border) !important;
+  border-color: rgba(7, 63, 140, 0.20) !important;
 }
 
-input:focus,
-textarea:focus,
-select:focus {
-  outline: 1px solid var(--lp-blue) !important;
-  border-color: var(--lp-blue) !important;
+/* Footer */
+.footer,
+footer {
+  background-color: var(--lp-blue-dark) !important;
+  color: var(--lp-mint-soft) !important;
 }
 
-/* LINKS */
-a {
-  color: inherit;
-}
-
-/* SELECTION */
 ::selection {
   background: var(--lp-blue);
-  color: white;
-}
-
-/* VINTAGE DECORATIVE DIVIDERS */
-.sectionHeader::after {
-  content: "✤";
-  display: block;
-  color: var(--lp-blue);
-  font-size: 17px;
-  margin: 15px auto 0;
-}
-
-/* FOOTER */
-footer,
-.footer {
-  background: var(--lp-blue-dark) !important;
-  color: var(--lp-mint-light) !important;
-  border-top: 1px solid var(--lp-blue) !important;
-}
-
-/* MOBILE */
-@media (max-width: 700px) {
-  .header {
-    background: rgba(237, 247, 241, 0.98) !important;
-  }
-
-  .header .brand {
-    color: var(--lp-blue) !important;
-  }
+  color: #ffffff;
 }
