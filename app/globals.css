@@ -966,3 +966,8 @@ footer *,
     font-size: 15px;
   }
 }
+
+/* BIGGER FABRICS NAV */
+.nav a[href="#fabrics"] {
+  font-size: 21px !important;
+}
