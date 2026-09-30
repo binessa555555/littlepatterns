@@ -458,7 +458,7 @@ export default function Home() {
                     marginTop: "8px"
                   }}
                 >
-                  Total: AED {(cartTotal + 25).toFixed(2)}
+                  Total: AED {(cartTotal + 35).toFixed(2)}
                 </strong>
               </div>
 
