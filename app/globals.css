@@ -971,3 +971,11 @@ footer *,
 .nav a[href="#fabrics"] {
   font-size: 21px !important;
 }
+
+/* LITTLE PATTERNS — STOCK */
+.stockText {
+  margin-top: 5px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #06377D;
+}

@@ -3,7 +3,7 @@ import nodemailer from "nodemailer";
 
 export async function POST(request: Request) {
   try {
-    const { customer, items = [] } = await request.json();
+    const { customer, items = [], promoCode: promoCodeInput = "" } = await request.json();
 
     if (
       !customer?.firstName ||
@@ -34,8 +34,10 @@ export async function POST(request: Request) {
       0
     );
 
-    const delivery = 25;
-    const total = fabricTotal + delivery;
+    const delivery = 35;
+    const promoCode = String(promoCodeInput || "").trim();
+    const discount = promoCode === "9604" ? 35 : 0;
+    const total = fabricTotal + delivery - discount;
 
     const orderNumber = `LP-${Date.now()
       .toString()
@@ -142,7 +144,7 @@ export async function POST(request: Request) {
             font-size:16px;
           ">
             <p>Fabrics: AED ${fabricTotal.toFixed(2)}</p>
-            <p>Delivery: AED 25.00</p>
+            <p>Delivery: AED 35.00</p>
 
             <h2>
               TOTAL: AED ${total.toFixed(2)}
@@ -184,7 +186,7 @@ export async function POST(request: Request) {
             area: customer.area || "",
             items: itemsSummary,
             subtotal: fabricTotal,
-            delivery: 25,
+            delivery: 35,
             total,
             payment: "Cash on Delivery",
             status: "New",

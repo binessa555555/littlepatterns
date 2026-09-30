@@ -145,3 +145,85 @@
     padding-top: 55px;
   }
 }
+
+/* PROMO CODE */
+.promoCodeBox {
+  margin: 22px 0 16px;
+}
+
+.promoCodeBox label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 15px;
+}
+
+.promoCodeInput {
+  display: flex;
+  gap: 8px;
+}
+
+.promoCodeInput input {
+  flex: 1;
+  margin: 0 !important;
+}
+
+.promoCodeInput button {
+  padding: 0 20px;
+  border: 1px solid #06377D;
+  background: #06377D;
+  color: #fff;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.promoSuccess {
+  margin-top: 8px;
+  font-size: 14px;
+  color: #06377D;
+}
+
+.summaryRow {
+  display: flex;
+  justify-content: space-between;
+  margin: 8px 0;
+}
+
+/* PROMO CODE */
+.promoCodeBox {
+  margin: 20px 0;
+}
+
+.promoCodeBox label {
+  display: block;
+  margin-bottom: 8px;
+}
+
+.promoCodeInput {
+  display: flex;
+  gap: 8px;
+}
+
+.promoCodeInput input {
+  flex: 1;
+  margin: 0 !important;
+}
+
+.promoCodeInput button {
+  padding: 0 20px;
+  border: 1px solid #06377D;
+  background: #06377D;
+  color: white;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.promoSuccess {
+  margin: 8px 0 0;
+  font-size: 14px;
+}
+
+.summaryRow {
+  display: flex;
+  justify-content: space-between;
+  margin: 8px 0;
+}

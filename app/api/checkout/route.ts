@@ -35,8 +35,10 @@ export async function POST(request: Request) {
       0
     );
 
-    // AED 250 per fabric + AED 25 delivery
-    const amount = (totalQuantity * 25000) + 2500;
+    // AED 250 per fabric + AED 35 delivery
+    const promoCode = String(body.promoCode || "").trim();
+    const discountFils = promoCode === "9604" ? 3500 : 0;
+    const amount = (totalQuantity * 25000) + 3500 - discountFils;
 
     const orderSummary = cleanItems
       .map((item: { name: string; quantity: number }) => `${item.name} x ${item.quantity}`)

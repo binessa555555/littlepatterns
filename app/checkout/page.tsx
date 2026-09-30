@@ -13,6 +13,8 @@ type CartItem = {
 export default function CheckoutPage() {
   const [cart, setCart] = useState<CartItem[]>([]);
   const [payment, setPayment] = useState("ziina");
+  const [promoCode, setPromoCode] = useState("");
+  const [promoApplied, setPromoApplied] = useState(false);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -27,8 +29,9 @@ export default function CheckoutPage() {
     0
   );
 
-  const delivery = 25;
-  const total = fabricTotal + delivery;
+  const delivery = 35;
+  const discount = promoApplied ? 35 : 0;
+  const total = fabricTotal + delivery - discount;
 
   async function submitOrder(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -61,6 +64,7 @@ export default function CheckoutPage() {
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             customer,
+          promoCode: promoApplied ? "9604" : "",
             items: cart,
           }),
         });
@@ -86,6 +90,7 @@ export default function CheckoutPage() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           customer,
+          promoCode: promoApplied ? "9604" : "",
           items: cart.map((item) => ({
             name: item.name,
             quantity: item.quantity,
@@ -242,8 +247,53 @@ export default function CheckoutPage() {
                 marginTop:"10px"
               }}>
                 <span>Delivery</span>
-                <span>AED 25.00</span>
+                <span>AED 35.00</span>
               </div>
+              
+              <div className="promoCodeBox">
+                <label htmlFor="promoCode">Promo code</label>
+
+                <div className="promoCodeInput">
+                  <input
+                    id="promoCode"
+                    type="text"
+                    value={promoCode}
+                    onChange={(e) => {
+                      setPromoCode(e.target.value);
+                      setPromoApplied(false);
+                    }}
+                    placeholder="Enter promo code"
+                  />
+
+                  <button
+                    type="button"
+                    onClick={() => {
+                      if (promoCode.trim() === "9604") {
+                        setPromoApplied(true);
+                      } else {
+                        setPromoApplied(false);
+                        alert("Invalid promo code");
+                      }
+                    }}
+                  >
+                    APPLY
+                  </button>
+                </div>
+
+                {promoApplied && (
+                  <p className="promoSuccess">
+                    Promo applied — AED 35.00 discount
+                  </p>
+                )}
+              </div>
+
+              {promoApplied && (
+                <div className="summaryRow">
+                  <span>Promo discount</span>
+                  <span>− AED 35.00</span>
+                </div>
+              )}
+
 
               <div style={{
                 display:"flex",

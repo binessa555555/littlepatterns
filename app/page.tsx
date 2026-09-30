@@ -44,14 +44,10 @@ export default function Home() {
       );
 
       if (existing) {
-        return current.map((item) =>
-          item.product.name === product.name
-            ? { ...item, quantity: item.quantity + qty }
-            : item
-        );
+        return current;
       }
 
-      return [...current, { product, quantity: qty }];
+      return [...current, { product, quantity: 1 }];
     });
   }
 
@@ -60,7 +56,7 @@ export default function Home() {
       current
         .map((item) =>
           item.product.name === productName
-            ? { ...item, quantity: item.quantity + change }
+            ? { ...item, quantity: Math.min(1, item.quantity + change) }
             : item
         )
         .filter((item) => item.quantity > 0)
