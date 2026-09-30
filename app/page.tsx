@@ -448,7 +448,7 @@ export default function Home() {
                 </div>
 
                 <div style={{ fontSize: "16px" }}>
-                  Delivery: AED 25.00
+                  Delivery: AED 35.00
                 </div>
 
                 <strong
