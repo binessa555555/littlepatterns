@@ -80,6 +80,37 @@ export async function POST(request: Request) {
       );
     }
 
+    // Mark these fabrics SOLD OUT once Ziina checkout is successfully created.
+    const googleOrdersUrl = process.env.GOOGLE_ORDERS_URL;
+
+    if (googleOrdersUrl) {
+      try {
+        await fetch(googleOrdersUrl, {
+          method: "POST",
+          headers: {
+            "Content-Type": "text/plain;charset=utf-8",
+          },
+          body: JSON.stringify({
+            orderNumber: `ZIINA-${Date.now().toString().slice(-8)}`,
+            customer: "Ziina Checkout",
+            items: cleanItems
+              .map((item: { name: string; quantity: number }) =>
+                `${item.name} x ${item.quantity}`
+              )
+              .join(", "),
+            stockItems: cleanItems,
+            subtotal: totalQuantity * 250,
+            delivery: 35,
+            total: amount / 100,
+            payment: "Ziina",
+            status: "Payment Checkout Created",
+          }),
+        });
+      } catch (stockError) {
+        console.error("Could not update Ziina stock:", stockError);
+      }
+    }
+
     return NextResponse.json({
       url: data.redirect_url,
     });

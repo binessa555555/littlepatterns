@@ -185,6 +185,7 @@ export async function POST(request: Request) {
             city: customer.city || "",
             area: customer.area || "",
             items: itemsSummary,
+            stockItems: cleanItems,
             subtotal: fabricTotal,
             delivery: 35,
             total,

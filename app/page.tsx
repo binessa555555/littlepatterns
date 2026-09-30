@@ -1,7 +1,7 @@
-"use client";
+  "use client";
 
 import Image from "next/image";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { products } from "@/data/products";
 
 type Product = (typeof products)[number];
@@ -9,6 +9,14 @@ type Product = (typeof products)[number];
 export default function Home() {
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [quantity, setQuantity] = useState(1);
+  const [stock, setStock] = useState<Record<string, string>>({});
+
+  useEffect(() => {
+    fetch("/api/stock", { cache: "no-store" })
+      .then((res) => res.json())
+      .then((data) => setStock(data))
+      .catch(() => {});
+  }, []);
 
   const [cart, setCart] = useState<{ product: Product; quantity: number }[]>([]);
   const [wishlist, setWishlist] = useState<string[]>([]);
@@ -38,6 +46,8 @@ export default function Home() {
   }
 
   function addToCart(product: Product, qty = 1) {
+    if (stock[product.name] === "SOLD OUT") return;
+
     setCart((current) => {
       const existing = current.find(
         (item) => item.product.name === product.name
@@ -244,11 +254,16 @@ export default function Home() {
                     <button
                       className="addButton"
                       onClick={() => addToCart(product)}
+                      disabled={stock[product.name] === "SOLD OUT"}
                     >
                       Add to Cart
                     </button>
 
-                    <p className="cardStockText">1 piece in stock</p>
+                    <p className={`cardStockText ${stock[product.name] === "SOLD OUT" ? "soldOutText" : ""}`}>
+                      {stock[product.name] === "SOLD OUT"
+                        ? "SOLD OUT"
+                        : "1 piece in stock"}
+                    </p>
 
                     <a
                       className="instagramButton"
@@ -587,6 +602,7 @@ export default function Home() {
 
               <button
                 className="modalAdd"
+                  disabled={stock[selectedProduct.name] === "SOLD OUT"}
                 onClick={() => {
                   addToCart(selectedProduct, quantity);
                   setSelectedProduct(null);

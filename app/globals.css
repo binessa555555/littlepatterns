@@ -987,3 +987,15 @@ footer *,
   font-weight: 600;
   color: #06377D;
 }
+
+
+/* SOLD OUT */
+.soldOutText {
+  font-weight: 700 !important;
+  color: #8b1e1e !important;
+}
+
+button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed !important;
+}
