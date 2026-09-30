@@ -999,27 +999,3 @@ button:disabled {
   opacity: 0.45;
   cursor: not-allowed !important;
 }
-
-/* I TOLD YOU BEH SCREEN */
-body::before {
-  content: "i told you beh";
-  position: fixed;
-  inset: 0;
-  z-index: 2147483647;
-  background: #000000;
-  color: #D4AF37;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: "EB Garamond", Georgia, serif;
-  font-size: clamp(42px, 8vw, 110px);
-  font-weight: 600;
-  text-align: center;
-  letter-spacing: 2px;
-}
-
-html,
-body {
-  overflow: hidden !important;
-}
-
