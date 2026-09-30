@@ -248,6 +248,8 @@ export default function Home() {
                       Add to Cart
                     </button>
 
+                    <p className="cardStockText">1 piece in stock</p>
+
                     <a
                       className="instagramButton"
                       href="https://www.instagram.com/"

@@ -979,3 +979,11 @@ footer *,
   font-weight: 600;
   color: #06377D;
 }
+
+/* PRODUCT CARD STOCK */
+.cardStockText {
+  margin: 7px 0 0;
+  font-size: 13px;
+  font-weight: 600;
+  color: #06377D;
+}
