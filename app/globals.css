@@ -999,3 +999,20 @@ button:disabled {
   opacity: 0.45;
   cursor: not-allowed !important;
 }
+
+/* STOCK POSITION FIX */
+.cardStockText {
+  display: block !important;
+  width: 100% !important;
+  margin: 3px 0 10px !important;
+  padding: 0 !important;
+  text-align: left !important;
+}
+
+/* Make Instagram link clickable above overlapping elements */
+.instagramButton,
+.modalInstagram {
+  position: relative !important;
+  z-index: 10 !important;
+  pointer-events: auto !important;
+}

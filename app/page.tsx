@@ -249,13 +249,16 @@ export default function Home() {
                 <div className="productInfo">
                   <h3>{product.name}</h3>
                   <p className="price">AED 250.00</p>
+                    
+
+                  <div className="productButtons">
+                    
                     <p className={`cardStockText ${stock[product.name] === "SOLD OUT" ? "soldOutText" : ""}`}>
                       {stock[product.name] === "SOLD OUT"
                         ? "SOLD OUT"
                         : "1 piece in stock"}
                     </p>
 
-                  <div className="productButtons">
                     <button
                       className="addButton"
                       onClick={() => addToCart(product)}
