@@ -14,7 +14,15 @@ export default function Home() {
   useEffect(() => {
     fetch("/api/stock", { cache: "no-store" })
       .then((res) => res.json())
-      .then((data) => setStock(data))
+      .then((data) =>
+        setStock({
+          ...data,
+          "Teal Dahlia": "SOLD OUT",
+          "Blush Peonies": "SOLD OUT",
+          "Plum Wildflowers": "SOLD OUT",
+          "Sage Dahlias": "SOLD OUT",
+        })
+      )
       .catch(() => {});
   }, []);
 
