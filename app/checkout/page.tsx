@@ -238,22 +238,7 @@ export default function CheckoutPage() {
             }}>
               <div style={{display:"flex", justifyContent:"space-between"}}>
                 <span>Fabrics</span>
-                <div style={{ textAlign: "right" }}>
-                  <span style={{ display: "block" }}>
-                    AED {fabricTotal.toFixed(2)}
-                  </span>
-                  <span
-                    style={{
-                      display: "block",
-                      marginTop: "4px",
-                      fontSize: "12px",
-                      fontWeight: "600",
-                      color: "#06377D",
-                    }}
-                  >
-                    1 piece left
-                  </span>
-                </div>
+                <span>AED {fabricTotal.toFixed(2)}</span>
               </div>
 
               <div style={{
