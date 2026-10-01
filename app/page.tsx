@@ -414,6 +414,17 @@ export default function Home() {
                     <strong>
                       AED {(item.quantity * 250).toFixed(2)}
                     </strong>
+                        <span
+                          style={{
+                            display: "block",
+                            marginTop: "4px",
+                            fontSize: "13px",
+                            fontWeight: "600",
+                            color: "#06377D",
+                          }}
+                        >
+                          1 piece left in stock
+                        </span>
 
                     <button
                       onClick={() => removeFromCart(item.product.name)}
