@@ -2,46 +2,53 @@ import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {
   try {
-    const apiKey = process.env.ZIINA_API_KEY;
-
-    if (!apiKey) {
-      return NextResponse.json(
-        { error: "Ziina API key is missing" },
-        { status: 500 }
-      );
-    }
-
     const body = await request.json();
 
-    const items = Array.isArray(body.items) ? body.items : [];
+    const {
+      customer = {},
+      items = [],
+      promoCode = "",
+    } = body;
 
-    if (items.length === 0) {
+    if (!Array.isArray(items) || items.length === 0) {
       return NextResponse.json(
         { error: "Your cart is empty" },
         { status: 400 }
       );
     }
 
-    const cleanItems = items.map((item: { name?: string; quantity?: number }) => ({
-      name: String(item.name || "Little Patterns Fabric"),
-      quantity: Math.max(
-        1,
-        Math.floor(Number(item.quantity) || 1)
-      ),
-    }));
+    const apiKey = process.env.ZIINA_API_KEY;
 
-    const totalQuantity = cleanItems.reduce(
-      (total: number, item: { name: string; quantity: number }) => total + item.quantity,
-      0
+    if (!apiKey) {
+      return NextResponse.json(
+        { error: "Ziina is not configured" },
+        { status: 500 }
+      );
+    }
+
+    const cleanItems = items.map(
+      (item: { name?: string; quantity?: number }) => ({
+        name: String(item.name || "Little Patterns Fabric"),
+        quantity: 1,
+      })
     );
 
-    // AED 250 per fabric + AED 35 delivery
-    const promoCode = String(body.promoCode || "").trim();
-    const discountFils = promoCode === "9604" ? 3500 : 0;
-    const amount = (totalQuantity * 25000) + 3500 - discountFils;
+    const totalQuantity = cleanItems.length;
 
-    const orderSummary = cleanItems
-      .map((item: { name: string; quantity: number }) => `${item.name} x ${item.quantity}`)
+    const subtotal = totalQuantity * 250;
+    const delivery = 35;
+    const discount =
+      String(promoCode).trim() === "9604" ? 35 : 0;
+
+    const total = subtotal + delivery - discount;
+
+    const amount = total * 100;
+
+    const itemsSummary = cleanItems
+      .map(
+        (item: { name: string; quantity: number }) =>
+          `${item.name} x ${item.quantity}`
+      )
       .join(", ");
 
     const ziinaResponse = await fetch(
@@ -55,7 +62,7 @@ export async function POST(request: Request) {
         body: JSON.stringify({
           amount,
           currency_code: "AED",
-          message: orderSummary,
+          message: itemsSummary,
           success_url:
             "https://www.littlepatterns.ae/?payment=success",
           cancel_url:
@@ -80,40 +87,57 @@ export async function POST(request: Request) {
       );
     }
 
-    // Mark these fabrics SOLD OUT once Ziina checkout is successfully created.
-    const googleOrdersUrl = process.env.GOOGLE_ORDERS_URL;
+    const googleOrdersUrl =
+      process.env.GOOGLE_ORDERS_URL;
 
     if (googleOrdersUrl) {
+      const orderNumber =
+        `LP-${Date.now().toString().slice(-8)}`;
+
       try {
         await fetch(googleOrdersUrl, {
           method: "POST",
           headers: {
-            "Content-Type": "text/plain;charset=utf-8",
+            "Content-Type":
+              "text/plain;charset=utf-8",
           },
           body: JSON.stringify({
-            orderNumber: `ZIINA-${Date.now().toString().slice(-8)}`,
-            customer: "Ziina Checkout",
-            items: cleanItems
-              .map((item: { name: string; quantity: number }) =>
-                `${item.name} x ${item.quantity}`
-              )
-              .join(", "),
+            orderNumber,
+
+            customer:
+              `${customer.firstName || ""} ${customer.lastName || ""}`.trim(),
+
+            phone: customer.phone || "",
+            email: customer.email || "",
+            address: customer.address || "",
+            city: customer.city || "",
+            area: customer.area || "",
+
+            items: itemsSummary,
             stockItems: cleanItems,
-            subtotal: totalQuantity * 250,
-            delivery: 35,
-            total: amount / 100,
+
+            subtotal,
+            delivery,
+            discount,
+            total,
+
             payment: "Ziina",
-            status: "Payment Checkout Created",
+            status: "Order Placed",
+            notes: customer.notes || "",
           }),
         });
-      } catch (stockError) {
-        console.error("Could not update Ziina stock:", stockError);
+      } catch (error) {
+        console.error(
+          "Google order/stock update failed:",
+          error
+        );
       }
     }
 
     return NextResponse.json({
       url: data.redirect_url,
     });
+
   } catch (error) {
     console.error("Ziina checkout error:", error);
 
