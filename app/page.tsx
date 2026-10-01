@@ -249,6 +249,11 @@ export default function Home() {
                 <div className="productInfo">
                   <h3>{product.name}</h3>
                   <p className="price">AED 250.00</p>
+                    <p className={`cardStockText ${stock[product.name] === "SOLD OUT" ? "soldOutText" : ""}`}>
+                      {stock[product.name] === "SOLD OUT"
+                        ? "SOLD OUT"
+                        : "1 piece in stock"}
+                    </p>
 
                   <div className="productButtons">
                     <button
@@ -259,15 +264,9 @@ export default function Home() {
                       Add to Cart
                     </button>
 
-                    <p className={`cardStockText ${stock[product.name] === "SOLD OUT" ? "soldOutText" : ""}`}>
-                      {stock[product.name] === "SOLD OUT"
-                        ? "SOLD OUT"
-                        : "1 piece in stock"}
-                    </p>
-
                     <a
                       className="instagramButton"
-                      href="https://www.instagram.com/"
+                      href="https://www.instagram.com/littlepatterns.ae/"
                       target="_blank"
                       rel="noreferrer"
                     >
@@ -614,7 +613,7 @@ export default function Home() {
 
               <a
                 className="modalInstagram"
-                href="https://www.instagram.com/littlepatterns.ae?stkn=cmtoajBueWIwaDJ5&utm_source=qr"
+                href="https://www.instagram.com/littlepatterns.ae/"
                 target="_blank"
                 rel="noreferrer"
               >
