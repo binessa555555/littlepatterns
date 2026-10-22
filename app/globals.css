@@ -1074,32 +1074,3 @@ button:disabled {
   font-weight: 600;
   color: #06377D;
 }
-
-/* LITTLE PATTERNS — COMING SOON */
-body {
-  background: #ffffff !important;
-  margin: 0 !important;
-  overflow: hidden !important;
-}
-
-body > * {
-  display: none !important;
-}
-
-body::before {
-  content: "call now stop stealing";
-  position: fixed;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: #ffffff;
-  color: #000000;
-  font-family: "EB Garamond", Georgia, serif;
-  font-size: clamp(32px, 5vw, 72px);
-  font-weight: 400;
-  text-align: center;
-  padding: 30px;
-  box-sizing: border-box;
-  z-index: 999999;
-}
