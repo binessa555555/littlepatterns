@@ -10,6 +10,15 @@ export default function LaunchCountdown() {
     useState<number | null>(null);
 
   useEffect(() => {
+    const preview =
+      new URLSearchParams(window.location.search).get("preview") === "1";
+
+    if (preview) {
+      setRemaining(0);
+      document.body.style.overflow = "";
+      return;
+    }
+
     const update = () => {
       const left =
         Math.max(0, LAUNCH_TIME - Date.now());
