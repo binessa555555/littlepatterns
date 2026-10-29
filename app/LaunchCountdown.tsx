@@ -2,27 +2,28 @@
 
 import { useEffect, useState } from "react";
 
-const LAUNCH_TIME = new Date("2026-10-29T17:27:00+04:00").getTime();
+const LAUNCH_TIME =
+  new Date("2026-10-29T17:27:00+04:00").getTime();
 
 export default function LaunchCountdown() {
-  const [remaining, setRemaining] = useState(() =>
-    Math.max(0, LAUNCH_TIME - Date.now())
-  );
+  const [remaining, setRemaining] =
+    useState<number | null>(null);
 
   useEffect(() => {
-    if (Date.now() < LAUNCH_TIME) {
-      document.body.style.overflow = "hidden";
-    }
+    const update = () => {
+      const left =
+        Math.max(0, LAUNCH_TIME - Date.now());
 
-    const timer = setInterval(() => {
-      const left = Math.max(0, LAUNCH_TIME - Date.now());
       setRemaining(left);
 
-      if (left <= 0) {
-        document.body.style.overflow = "";
-        clearInterval(timer);
-      }
-    }, 1000);
+      document.body.style.overflow =
+        left > 0 ? "hidden" : "";
+    };
+
+    update();
+
+    const timer =
+      setInterval(update, 1000);
 
     return () => {
       clearInterval(timer);
@@ -30,14 +31,23 @@ export default function LaunchCountdown() {
     };
   }, []);
 
-  if (remaining <= 0) return null;
+  if (remaining === null || remaining <= 0)
+    return null;
 
-  const totalSeconds = Math.floor(remaining / 1000);
-  const hours = Math.floor(totalSeconds / 3600);
-  const minutes = Math.floor((totalSeconds % 3600) / 60);
-  const seconds = totalSeconds % 60;
+  const total =
+    Math.floor(remaining / 1000);
 
-  const pad = (n: number) => String(n).padStart(2, "0");
+  const hours =
+    Math.floor(total / 3600);
+
+  const minutes =
+    Math.floor((total % 3600) / 60);
+
+  const seconds =
+    total % 60;
+
+  const pad = (n: number) =>
+    String(n).padStart(2, "0");
 
   return (
     <div
@@ -51,15 +61,14 @@ export default function LaunchCountdown() {
         alignItems: "center",
         justifyContent: "center",
         textAlign: "center",
-        padding: "30px",
         color: "#000000",
+        padding: "30px",
       }}
     >
       <div
         style={{
-          fontFamily: "Georgia, 'Times New Roman', serif",
-          fontSize: "clamp(30px, 5vw, 64px)",
-          fontWeight: 400,
+          fontFamily: "Georgia, serif",
+          fontSize: "clamp(30px,5vw,64px)",
           marginBottom: "28px",
         }}
       >
@@ -69,8 +78,7 @@ export default function LaunchCountdown() {
       <div
         style={{
           fontFamily: "Arial, sans-serif",
-          fontSize: "clamp(38px, 7vw, 80px)",
-          fontWeight: 300,
+          fontSize: "clamp(38px,7vw,80px)",
           letterSpacing: "4px",
         }}
       >
@@ -83,10 +91,9 @@ export default function LaunchCountdown() {
           fontFamily: "Arial, sans-serif",
           fontSize: "12px",
           letterSpacing: "3px",
-          textTransform: "uppercase",
         }}
       >
-        Hours &nbsp;&nbsp; Minutes &nbsp;&nbsp; Seconds
+        HOURS &nbsp;&nbsp; MINUTES &nbsp;&nbsp; SECONDS
       </div>
     </div>
   );
