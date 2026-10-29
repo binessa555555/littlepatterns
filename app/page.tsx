@@ -33,9 +33,14 @@ export default function Home() {
   const [search, setSearch] = useState("");
 
   const filteredProducts = useMemo(() => {
-    if (!search.trim()) return products;
+    const orderedProducts = [
+      ...products.slice(30),
+      ...products.slice(0, 30),
+    ];
 
-    return products.filter((product) =>
+    if (!search.trim()) return orderedProducts;
+
+    return orderedProducts.filter((product) =>
       product.name.toLowerCase().includes(search.toLowerCase())
     );
   }, [search]);
@@ -227,6 +232,8 @@ export default function Home() {
         <div className="productGrid">
           {filteredProducts.map((product) => {
             const liked = wishlist.includes(product.name);
+            const isNew =
+              products.findIndex((p) => p.name === product.name) >= 30;
 
             return (
               <article className="productCard" key={product.name}>
@@ -234,6 +241,25 @@ export default function Home() {
                   className="imageBox"
                   onClick={() => openProduct(product)}
                 >
+                  {isNew && (
+                    <span
+                      style={{
+                        position: "absolute",
+                        top: "10px",
+                        left: "10px",
+                        zIndex: 10,
+                        background: "white",
+                        color: "#06377D",
+                        fontSize: "9px",
+                        fontWeight: 600,
+                        letterSpacing: "1.5px",
+                        padding: "4px 7px",
+                      }}
+                    >
+                      NEW
+                    </span>
+                  )}
+
                   <Image
                     src={product.image}
                     alt={product.name}
