@@ -81,7 +81,8 @@ export default function CheckoutPage() {
           "Order placed successfully! Payment will be collected on delivery."
         );
 
-        window.location.href = "/?order=success";
+        window.location.href =
+          `/order-confirmed?method=cash&order=${encodeURIComponent(data.orderNumber || "")}`;
         return;
       }
 
